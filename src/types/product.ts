@@ -19,6 +19,21 @@ export type ProductListResponse = {
 };
 
 export type ProductSort = 'price_asc' | 'price_desc' | 'newest' | 'rating';
+export type ProductCategory =
+  | 'Классические'
+  | 'Исторические'
+  | 'Театральные'
+  | 'Экспериментальные'
+  | 'Экзотические'
+  | 'Современные';
+export type ProductThickness = 'Низкая' | 'Средняя' | 'Высокая';
+export type ProductCurliness = 'Низкая' | 'Средняя' | 'Высокая';
+export type ProductStyle =
+  | 'Деловой'
+  | 'Винтаж'
+  | 'Театральный'
+  | 'Экспериментальный'
+  | 'Военный';
 
 export type ProductRating = {
   productId: string;

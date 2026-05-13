@@ -14,6 +14,13 @@ export type Cart = {
 };
 
 export type AddToCartPayload = {
-  productId: string;
-  quantity?: number;
+  item: CartItem;
+};
+
+export type DecrementQuantityPayload = {
+  productId: CartItem['productId'];
+};
+
+export type RemoveFromCartPayload = {
+  productId: CartItem['productId'];
 };
