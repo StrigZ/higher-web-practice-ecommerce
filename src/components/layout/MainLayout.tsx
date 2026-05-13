@@ -2,7 +2,15 @@ import { Outlet } from 'react-router-dom';
 
 export function MainLayout() {
   return (
-    <main style={{ maxWidth: 960, margin: '0 auto', padding: 16 }}>
+    <main
+      className="test"
+      id="test"
+      style={{
+        margin: '0 auto',
+        maxWidth: 960,
+        padding: 16,
+      }}
+    >
       <Outlet />
     </main>
   );
