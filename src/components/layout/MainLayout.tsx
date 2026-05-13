@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 export function MainLayout() {
   return (
     <main
-      className="test"
+      className="flex items-center justify-center bg-red-500"
       id="test"
       style={{
         margin: '0 auto',

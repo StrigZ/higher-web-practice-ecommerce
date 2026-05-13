@@ -1,4 +1,5 @@
 /* Minimal neutral base styles for the student template. */
+@import 'tailwindcss';
 
 *,
 *::before,
