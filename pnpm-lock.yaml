@@ -63,6 +63,9 @@ importers:
       '@eslint/js':
         specifier: ^9.39.4
         version: 9.39.4
+      '@jest/globals':
+        specifier: ^30.4.1
+        version: 30.4.1
       '@testing-library/jest-dom':
         specifier: ^6.9.1
         version: 6.9.1
