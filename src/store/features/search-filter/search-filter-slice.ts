@@ -1,11 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import type { ProductSort } from '@/types';
 import type {
   ProductCategory,
   ProductCurliness,
   ProductStyle,
   ProductThickness,
+  ProductSort,
 } from '@/types';
 
 interface SearchFiltersState {
@@ -16,8 +16,8 @@ interface SearchFiltersState {
   thickness: ProductThickness | null;
   curliness: ProductCurliness | null;
 
-  isWaxRequired: boolean;
-  doesIncreasedCharisma: boolean;
+  isWaxRequired: boolean | null;
+  doesIncreasedCharisma: boolean | null;
 
   minPrice: number | null;
   maxPrice: number | null;
@@ -33,8 +33,8 @@ const initialState: SearchFiltersState = {
   thickness: null,
   curliness: null,
 
-  isWaxRequired: false,
-  doesIncreasedCharisma: false,
+  isWaxRequired: null,
+  doesIncreasedCharisma: null,
 
   minPrice: null,
   maxPrice: null,
@@ -47,6 +47,7 @@ export const searchFiltersSlice = createSlice({
   initialState,
   selectors: {
     selectAllFilters: (state) => state,
+    selectSortBy: (state) => state.sortBy,
   },
   reducers: {
     setSearchTerm(state, action: PayloadAction<string>) {
@@ -72,10 +73,10 @@ export const searchFiltersSlice = createSlice({
     },
     setPriceRange(
       state,
-      action: PayloadAction<{ min?: number; max?: number }>,
+      action: PayloadAction<{ min: number | null; max: number | null }>,
     ) {
-      state.minPrice = action.payload.min ?? state.minPrice;
-      state.maxPrice = action.payload.max ?? state.maxPrice;
+      state.minPrice = action.payload.min;
+      state.maxPrice = action.payload.max;
     },
 
     setSortBy(state, action: PayloadAction<ProductSort>) {
@@ -100,4 +101,4 @@ export const {
   setThickness,
 } = searchFiltersSlice.actions;
 
-export const { selectAllFilters } = searchFiltersSlice.selectors;
+export const { selectAllFilters, selectSortBy } = searchFiltersSlice.selectors;
