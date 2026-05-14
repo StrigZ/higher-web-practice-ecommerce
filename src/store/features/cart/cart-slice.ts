@@ -7,7 +7,7 @@ import type {
   RemoveFromCartPayload,
 } from '@/types';
 
-const initialState: Cart = {
+export const initialState: Cart = {
   items: [],
   totalItems: 0,
   totalPrice: 0,
