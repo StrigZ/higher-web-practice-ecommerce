@@ -8,7 +8,7 @@ import type {
   ProductSort,
 } from '@/types';
 
-interface SearchFiltersState {
+export interface SearchFiltersState {
   searchTerm: string;
 
   category: ProductCategory | null;

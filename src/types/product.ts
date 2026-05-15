@@ -36,6 +36,7 @@ export type ProductStyle =
   | 'Военный';
 
 export type ProductRating = {
+  id: string;
   productId: string;
   userId: string;
   userName: string;
