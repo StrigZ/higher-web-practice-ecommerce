@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { buildQueryParams } from '@/lib/utils/build-query-params';
+import { buildQueryParams } from '@/lib/build-query-params';
 import type { SearchFiltersState } from '@/store/features/search-filter/search-filter-slice';
 import type { Product } from '@/types';
 

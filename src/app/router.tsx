@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MainLayout } from '../components/layout';
 import { StubPage } from '../pages/_StubPage';
 
-import { ProtectedRoute } from '@/components/layout/protected-route';
+import { ProtectedRoute } from '@/components/protected-route';
 
 const router = createBrowserRouter([
   {

@@ -1,46 +1,10 @@
-/* Minimal neutral base styles for the student template. */
 @import 'tailwindcss';
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/roboto";
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/roboto';
 
 @custom-variant dark (&:is(.dark *));
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Arial,
-    sans-serif;
-  color: #111827;
-  line-height: 1.5;
-  background: #ffffff;
-}
-
-a {
-  color: inherit;
-}
-
-main h1 {
-  font-size: 24px;
-  margin: 0 0 12px;
-  line-height: 1.2;
-}
 
 @theme inline {
   --font-heading: 'Roboto Variable', sans-serif;
@@ -86,38 +50,27 @@ main h1 {
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --background: oklch(0.98 0 0); /* #f9fafb */
+  --foreground: oklch(0.21 0.018 264); /* #1f2937 */
+  --card: oklch(1 0 0); /* #ffffff */
+  --card-foreground: oklch(0.21 0.018 264);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.457 0.24 277.023);
-  --primary-foreground: oklch(0.962 0.018 272.314);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.785 0.115 274.713);
-  --chart-2: oklch(0.585 0.233 277.117);
-  --chart-3: oklch(0.511 0.262 276.966);
-  --chart-4: oklch(0.457 0.24 277.023);
-  --chart-5: oklch(0.398 0.195 277.366);
+  --popover-foreground: oklch(0.21 0.018 264);
+  --primary: oklch(0.35 0.18 264); /* #1e40af */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.47 0.22 264); /* #2563eb */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.96 0 0); /* #f3f4f6 */
+  --disabled: #9ca3af;
+  --muted-foreground: oklch(0.55 0.02 264); /* #6b7280 */
+  --accent: oklch(0.47 0.22 264); /* #2563eb */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.63 0.24 27); /* #ef4444 */
+  --success: oklch(0.6 0.15 162); /* #10b981 */
+  --border: oklch(0.92 0 0); /* #e5e7eb */
+  --input: oklch(0.96 0 0); /* #f3f4f6 */
+  --ring: oklch(0.47 0.22 264); /* #2563eb */
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.511 0.262 276.966);
-  --sidebar-primary-foreground: oklch(0.962 0.018 272.314);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
@@ -136,6 +89,7 @@ main h1 {
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --success: oklch(0.6 0.15 162); /* #10b981 */
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
@@ -159,9 +113,19 @@ main h1 {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground h-screen;
   }
   html {
     @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading;
+  }
+
+  .nav-link {
+    @apply hover:text-secondary flex h-full flex-col items-center justify-center gap-0.5 font-medium transition-colors;
   }
 }
