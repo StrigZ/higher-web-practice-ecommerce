@@ -1,3 +1,5 @@
+import type { productCategories } from '@/lib/constants';
+
 export type Product = {
   id: string;
   name: string;
@@ -19,13 +21,7 @@ export type ProductListResponse = {
 };
 
 export type ProductSort = 'price_asc' | 'price_desc' | 'newest' | 'rating';
-export type ProductCategory =
-  | 'Классические'
-  | 'Исторические'
-  | 'Театральные'
-  | 'Экспериментальные'
-  | 'Экзотические'
-  | 'Современные';
+export type ProductCategory = (typeof productCategories)[number];
 export type ProductThickness = 'Низкая' | 'Средняя' | 'Высокая';
 export type ProductCurliness = 'Низкая' | 'Средняя' | 'Высокая';
 export type ProductStyle =
