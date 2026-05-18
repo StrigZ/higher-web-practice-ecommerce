@@ -1,18 +1,60 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Search } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
+import { FieldError } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 
+const formSchema = z.object({
+  query: z.string().min(1, 'Запрос не может быть пустым.').trim(),
+});
+
 export function HeaderSearchbar() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      query: searchParams.get('search') ?? '',
+    },
+    mode: 'onSubmit',
+  });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    const { query } = data;
+
+    navigate(`/?search=${query}`);
+  }
+
   return (
-    <div className="group flex h-10 max-w-[568px] flex-1 items-center rounded-md">
+    <form
+      className="group relative flex h-10 max-w-142 flex-1 items-center rounded-md"
+      onSubmit={form.handleSubmit(onSubmit)}
+    >
       <Input
+        {...form.register('query')}
+        aria-invalid={!!form.formState.errors.query}
+        autoComplete="off"
         className="border-primary h-full rounded-md rounded-r-none border-2 transition-colors placeholder:text-base focus-visible:ring-0"
         placeholder="Искать"
       />
-      <Button className="group-focus-within:bg-secondary h-full shrink-0 rounded-l-none border-none px-6 transition-colors">
+      {form.formState.errors.query && (
+        <FieldError
+          className="absolute -bottom-6"
+          errors={[form.formState.errors.query]}
+        />
+      )}
+
+      <Button
+        className="group-focus-within:bg-secondary h-full shrink-0 rounded-l-none border-none px-6 transition-colors"
+        type="submit"
+      >
         <Search className="size-6" />
       </Button>
-    </div>
+    </form>
   );
 }
