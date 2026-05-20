@@ -6,7 +6,7 @@ import { HeaderSearchbar } from './header-search';
 export function Header() {
   return (
     <header className="bg-card">
-      <div className="container mx-auto flex items-center gap-5 py-2">
+      <div className="container mx-auto flex h-16 items-center gap-5 py-2">
         <div className="flex h-10 w-[280px] items-center justify-between">
           <HeaderLogo />
           <HeaderCatalog />

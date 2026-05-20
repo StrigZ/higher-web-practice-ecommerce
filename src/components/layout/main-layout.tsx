@@ -6,7 +6,7 @@ export function MainLayout() {
   return (
     <>
       <Header />
-      <main className="container mx-auto">
+      <main className="container mx-auto h-[calc(100%-64px)]">
         <Outlet />
       </main>
     </>
