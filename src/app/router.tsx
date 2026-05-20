@@ -4,6 +4,7 @@ import { MainLayout } from '../components/layout';
 import { StubPage } from '../pages/_StubPage';
 
 import { ProtectedRoute } from '@/components/protected-route';
+import { LoginPage } from '@/pages/login-page';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         path: 'login',
         element: (
           <ProtectedRoute access="guest">
-            <StubPage title="Войти" />
+            <LoginPage />
           </ProtectedRoute>
         ),
       },
