@@ -1,9 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import * as z from 'zod';
+import { Controller } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
-import { useLazyLoginQuery } from '@/api/users-api';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -19,42 +16,10 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { setUser } from '@/store/features/user/user-slice';
-import { useAppDispatch } from '@/store/hooks';
-
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'Поле не может быть пустым')
-    .email('Некорректный email')
-    .trim(),
-  password: z.string().min(1, 'Поле не может быть пустым').trim(),
-});
+import { useLoginForm } from '@/hooks/use-login-form';
 
 export function LoginPage() {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [login] = useLazyLoginQuery();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
-  async function onSubmit(data: z.infer<typeof formSchema>) {
-    const { email, password } = data;
-    const res = await login({ email, password });
-
-    if (res.data?.[0]) {
-      dispatch(setUser({ userId: res.data?.[0].id }));
-      navigate('/');
-      console.log('LOGIN');
-    } else {
-      form.setError('root', { message: 'Неверный email или пароль' });
-    }
-  }
+  const { form, onSubmit } = useLoginForm();
 
   return (
     <div className="flex h-full items-center justify-center">
@@ -72,12 +37,7 @@ export function LoginPage() {
                 name="email"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel
-                      className="text-muted-foreground"
-                      htmlFor="form-login"
-                    >
-                      Email
-                    </FieldLabel>
+                    <FieldLabel htmlFor="form-login">Email</FieldLabel>
                     <Input
                       {...field}
                       aria-invalid={fieldState.invalid}
@@ -96,12 +56,7 @@ export function LoginPage() {
                 name="password"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel
-                      className="text-muted-foreground"
-                      htmlFor="form-password"
-                    >
-                      Пароль
-                    </FieldLabel>
+                    <FieldLabel htmlFor="form-password">Пароль</FieldLabel>
                     <Input
                       {...field}
                       aria-invalid={fieldState.invalid}
@@ -121,7 +76,7 @@ export function LoginPage() {
         <CardFooter className="flex flex-col items-start gap-10">
           <Field orientation="vertical">
             <Button
-              className="w-full text-base font-bold"
+              className="h-10 w-full text-base font-bold"
               form="form"
               type="submit"
             >
