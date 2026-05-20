@@ -17,17 +17,11 @@ export const usersApi = createApi({
       }),
       providesTags: ['Users'],
     }),
-    login: builder.query<
-      User[],
-      { email?: string; userName?: string; password: string }
-    >({
-      query: ({ password, email, userName }) => {
-        const params: Record<string, string> = { password };
-        if (email) params.email = email;
-        if (userName) params.userName = userName;
-
-        return { url: API_URL, params };
-      },
+    login: builder.query<User[], { email?: string; password: string }>({
+      query: ({ password, email }) => ({
+        url: API_URL,
+        params: { password, email },
+      }),
       providesTags: ['Users'],
     }),
     //mutations
@@ -73,5 +67,6 @@ export const {
   useDeleteUserMutation,
   useGetUserByIdQuery,
   useLoginQuery,
+  useLazyLoginQuery,
   useRegisterUserMutation,
 } = usersApi;
