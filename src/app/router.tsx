@@ -5,6 +5,7 @@ import { StubPage } from '../pages/_StubPage';
 
 import { ProtectedRoute } from '@/components/protected-route';
 import { LoginPage } from '@/pages/login-page';
+import { RegisterPage } from '@/pages/register-page';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
         path: 'register',
         element: (
           <ProtectedRoute access="guest">
-            <StubPage title="Зарегистрироваться" />
+            <RegisterPage />
           </ProtectedRoute>
         ),
       },
