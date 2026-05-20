@@ -4,6 +4,10 @@ import type { User } from '@/types';
 
 const API_URL = '/users';
 
+type RegisterUserArgs = Pick<User, 'firstName' | 'lastName' | 'email'> & {
+  password: string;
+};
+
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
@@ -17,6 +21,12 @@ export const usersApi = createApi({
       }),
       providesTags: ['Users'],
     }),
+    getUserByEmail: builder.query<User[], { email: User['email'] }>({
+      query: ({ email }) => ({
+        url: API_URL,
+        params: { email },
+      }),
+    }),
     login: builder.query<User[], { email?: string; password: string }>({
       query: ({ password, email }) => ({
         url: API_URL,
@@ -26,11 +36,11 @@ export const usersApi = createApi({
     }),
     //mutations
     // register user
-    registerUser: builder.mutation<User, Omit<User, 'id'>>({
+    registerUser: builder.mutation<User, RegisterUserArgs>({
       query: (body) => ({
         url: API_URL,
         method: 'POST',
-        body,
+        body: { ...body, language: 'ru', notifyByEmail: false },
       }),
       invalidatesTags: ['Users'],
     }),
@@ -69,4 +79,5 @@ export const {
   useLoginQuery,
   useLazyLoginQuery,
   useRegisterUserMutation,
+  useLazyGetUserByEmailQuery,
 } = usersApi;
