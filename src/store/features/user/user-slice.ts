@@ -8,8 +8,8 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  userId: null,
-  isAuth: false,
+  userId: localStorage.getItem('userId'),
+  isAuth: !!localStorage.getItem('userId'),
 };
 
 export const userSlice = createSlice({
@@ -23,10 +23,12 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<{ userId: User['id'] }>) => {
       state.userId = action.payload.userId;
       state.isAuth = true;
+      localStorage.setItem('userId', action.payload.userId);
     },
     clearUser: (state) => {
       state.userId = null;
       state.isAuth = false;
+      localStorage.removeItem('userId');
     },
   },
 });
