@@ -36,7 +36,7 @@ export function CatalogControls({ layoutStyle, updateLayoutStyle }: Props) {
           })
         }
       >
-        <SelectTrigger>
+        <SelectTrigger className="bg-card ring-0">
           <SelectValue placeholder="Сортировка" />
         </SelectTrigger>
         <SelectContent>
@@ -51,7 +51,7 @@ export function CatalogControls({ layoutStyle, updateLayoutStyle }: Props) {
       </Select>
 
       <Select value={layoutStyle} onValueChange={updateLayoutStyle}>
-        <SelectTrigger>
+        <SelectTrigger className="bg-card ring-0">
           <SelectValue placeholder="Отображение" />
         </SelectTrigger>
         <SelectContent>
