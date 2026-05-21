@@ -51,48 +51,49 @@ export function ProductList({
           </li>
         ))}
       </ul>
-
-      <Pagination className="justify-start">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              text=""
-              onClick={() =>
-                setSearchParams((prev) => {
-                  prev.set('page', String(Math.max(1, page - 1)));
-                  return prev;
-                })
-              }
-            />
-          </PaginationItem>
-          {pages.map((n) => (
-            <PaginationItem key={n}>
-              <PaginationLink
-                isActive={page === n}
+      {totalPages > 1 && (
+        <Pagination className="justify-start">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                text=""
                 onClick={() =>
                   setSearchParams((prev) => {
-                    prev.set('page', String(n));
+                    prev.set('page', String(Math.max(1, page - 1)));
                     return prev;
                   })
                 }
-              >
-                {n}
-              </PaginationLink>
+              />
             </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext
-              text=""
-              onClick={() =>
-                setSearchParams((prev) => {
-                  prev.set('page', String(Math.min(totalPages, page + 1)));
-                  return prev;
-                })
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            {pages.map((n) => (
+              <PaginationItem key={n}>
+                <PaginationLink
+                  isActive={page === n}
+                  onClick={() =>
+                    setSearchParams((prev) => {
+                      prev.set('page', String(n));
+                      return prev;
+                    })
+                  }
+                >
+                  {n}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                text=""
+                onClick={() =>
+                  setSearchParams((prev) => {
+                    prev.set('page', String(Math.min(totalPages, page + 1)));
+                    return prev;
+                  })
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 }
