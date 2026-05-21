@@ -4,10 +4,9 @@ import { useSearchParams } from 'react-router-dom';
 import { Breadcrumbs } from '@/components/catalog-page/breadcrumbs';
 import { CatalogControls } from '@/components/catalog-page/catalog-controls';
 import { FilterSidebar } from '@/components/catalog-page/filter-sidebar/filter-sidebar';
-import { useProducts } from '@/hooks/use-products';
+import { ProductList } from '@/components/catalog-page/product-list';
 
 export function CatalogPage() {
-  const { isLoading, products } = useProducts();
   const [searchParams] = useSearchParams();
 
   const [layoutStyle, setLayoutStyle] = useState<'сетка' | 'список'>('сетка');
@@ -25,24 +24,7 @@ export function CatalogPage() {
               updateLayoutStyle={(style) => setLayoutStyle(style)}
             />
           </header>
-          {isLoading ? (
-            <div>loading</div>
-          ) : (
-            <ul>
-              {products.map((product) => (
-                <li>
-                  {product.name}
-                  <ul>
-                    {Object.entries(product.characteristics).map(([k, v]) => (
-                      <li>
-                        `${k}:${v}`
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ProductList />
         </div>
       </div>
     </div>
