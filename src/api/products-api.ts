@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { buildQueryParams } from '@/lib/build-query-params';
-import type { SearchFiltersState } from '@/store/features/search-filter/search-filter-slice';
 import type { Product } from '@/types';
 
 const API_URL = '/products';
@@ -11,10 +9,9 @@ export const productsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
   tagTypes: ['Products'],
   endpoints: (builder) => ({
-    getProducts: builder.query<Product[], SearchFiltersState>({
-      query: (filters) => ({
+    getProducts: builder.query<Product[], void>({
+      query: () => ({
         url: API_URL,
-        params: buildQueryParams(filters),
       }),
       providesTags: (result) => [
         { type: 'Products', id: 'LIST' },
