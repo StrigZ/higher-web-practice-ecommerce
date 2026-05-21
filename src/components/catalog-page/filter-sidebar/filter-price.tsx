@@ -8,13 +8,15 @@ import { useProducts } from '@/hooks/use-products';
 export function FilterPrice() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { products, isLoading } = useProducts();
+  const { products } = useProducts();
   const { maxPrice, minPrice } = useMemo(
     () => ({
-      minPrice: !isLoading ? Math.min(...products.map((p) => p.price)) : 0,
-      maxPrice: !isLoading ? Math.max(...products.map((p) => p.price)) : 0,
+      minPrice:
+        products.length > 0 ? Math.min(...products.map((p) => p.price)) : 0,
+      maxPrice:
+        products.length > 0 ? Math.max(...products.map((p) => p.price)) : 0,
     }),
-    [isLoading, products],
+    [products],
   );
 
   const updateSearchParams = (type: 'minPrice' | 'maxPrice', value: string) =>
