@@ -24,7 +24,7 @@ export function CatalogPage() {
               updateLayoutStyle={(style) => setLayoutStyle(style)}
             />
           </header>
-          <ProductList />
+          <ProductList layoutStyle={layoutStyle} />
         </div>
       </div>
     </div>

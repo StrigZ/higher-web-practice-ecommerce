@@ -12,9 +12,14 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { useProducts } from '@/hooks/use-products';
+import { cn } from '@/lib/utils';
 
 const PAGE_SIZE = 12;
-export function ProductList() {
+export function ProductList({
+  layoutStyle,
+}: {
+  layoutStyle: 'сетка' | 'список';
+}) {
   const { isLoading, products } = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -34,10 +39,15 @@ export function ProductList() {
 
   return (
     <div className="flex flex-col gap-y-2">
-      <ul className="bg-card grid grid-cols-4 grid-rows-3 gap-5 rounded-[12px] p-5">
+      <ul
+        className={cn('grid rounded-[12px] p-5', {
+          'bg-card grid-cols-4 grid-rows-3 gap-5': layoutStyle === 'сетка',
+          'grid-cols-1 gap-2': layoutStyle === 'список',
+        })}
+      >
         {paginated.map((product) => (
           <li key={product.id}>
-            <ProductCard {...product} />
+            <ProductCard {...product} layoutStyle={layoutStyle} />
           </li>
         ))}
       </ul>

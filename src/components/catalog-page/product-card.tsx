@@ -9,29 +9,68 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
 
-export function ProductCard({ images, name, price, id }: Product) {
+export function ProductCard({
+  images,
+  name,
+  price,
+  id,
+  layoutStyle,
+}: Product & { layoutStyle: 'сетка' | 'список' }) {
   return (
     <Link to={`/product/${id}`}>
-      <Card className="relative mx-auto w-full max-w-sm gap-y-2 border-none p-0 shadow-none ring-0">
+      <Card
+        className={cn('relative mx-auto w-full ring-0', {
+          'max-w-sm gap-y-2 border-none p-0 shadow-none':
+            layoutStyle === 'сетка',
+          'flex-row gap-x-2 p-4 pt-4!': layoutStyle === 'список',
+        })}
+      >
         <img
           alt="обложка усов"
-          className="relative z-20 aspect-video h-[172px] w-full object-cover"
+          className={cn('relative z-20 object-cover', {
+            'aspect-video h-[172px] w-full': layoutStyle === 'сетка',
+            'aspect-square h-[80px]': layoutStyle === 'список',
+          })}
           src={images[0]}
         />
 
-        <CardHeader className="gap-y-1 px-0">
-          <CardTitle className="text-sm font-normal">{name}</CardTitle>
+        <CardHeader
+          className={cn('gap-y-1 px-0', {
+            '': layoutStyle === 'сетка',
+            'flex flex-1 flex-row items-center justify-between':
+              layoutStyle === 'список',
+          })}
+        >
+          <CardTitle
+            className={cn('font-normal', {
+              'text-sm': layoutStyle === 'сетка',
+              'text-secondary text-base': layoutStyle === 'список',
+            })}
+          >
+            {name}
+          </CardTitle>
           <CardDescription>
-            <p className="text-success font-heading text-xl font-bold">
+            <p
+              className={cn('text-success font-heading font-bold', {
+                'text-xl': layoutStyle === 'сетка',
+                'pr-6 text-3xl': layoutStyle === 'список',
+              })}
+            >
               {price} ₽
             </p>
           </CardDescription>
         </CardHeader>
 
         <CardFooter className="p-0">
-          <Button className="h-10 w-full p-2">
+          <Button
+            className={cn('h-10 p-2', {
+              'w-full': layoutStyle === 'сетка',
+              'w-[100px]': layoutStyle === 'список',
+            })}
+          >
             <ShoppingCart className="size-6" />
           </Button>
         </CardFooter>
