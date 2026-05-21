@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { ActiveFiltersList } from '@/components/catalog-page/active-filters-list';
 import { Breadcrumbs } from '@/components/catalog-page/breadcrumbs';
 import { CatalogControls } from '@/components/catalog-page/catalog-controls';
 import { FilterSidebar } from '@/components/catalog-page/filter-sidebar/filter-sidebar';
@@ -24,6 +25,7 @@ export function CatalogPage() {
               updateLayoutStyle={(style) => setLayoutStyle(style)}
             />
           </header>
+          <ActiveFiltersList />
           <ProductList layoutStyle={layoutStyle} />
         </div>
       </div>
