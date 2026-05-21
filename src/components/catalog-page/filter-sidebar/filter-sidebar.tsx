@@ -11,7 +11,7 @@ export function FilterSidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <Card>
+    <Card className="ring-0">
       <CardContent className="flex flex-col gap-5">
         <FilterCategories />
         <FilterGroups />
