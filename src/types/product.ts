@@ -1,4 +1,11 @@
-import type { productCategories } from '@/lib/constants';
+import type {
+  productCategories,
+  productCharacteristics,
+  productCurliness,
+  productSortingVariants,
+  productStyles,
+  productThickness,
+} from '@/lib/constants';
 
 export type Product = {
   id: string;
@@ -6,7 +13,7 @@ export type Product = {
   description: string;
   price: number;
   images: string[];
-  characteristics: Record<string, string>;
+  characteristics: ProductCharacteristics;
   inStock: boolean;
   rating: number; // 1–5
   ratingCount: number;
@@ -20,16 +27,34 @@ export type ProductListResponse = {
   pageSize: number;
 };
 
-export type ProductSort = 'price_asc' | 'price_desc' | 'newest' | 'rating';
+export type ProductSort = (typeof productSortingVariants)[number];
 export type ProductCategory = (typeof productCategories)[number];
-export type ProductThickness = 'Низкая' | 'Средняя' | 'Высокая';
-export type ProductCurliness = 'Низкая' | 'Средняя' | 'Высокая';
-export type ProductStyle =
-  | 'Деловой'
-  | 'Винтаж'
-  | 'Театральный'
-  | 'Экспериментальный'
-  | 'Военный';
+export type ProductThickness = (typeof productThickness)[number];
+export type ProductCurliness = (typeof productCurliness)[number];
+export type ProductStyle = (typeof productStyles)[number];
+export type ProductCharacteristic = (typeof productCharacteristics)[number];
+export type ProductCharacteristics = Record<ProductCharacteristic, string>;
+export type ProductSubcategory = string;
+
+export type Filters = {
+  searchTerm: string | null;
+  category: ProductCategory | null;
+  subcategory: ProductSubcategory | null;
+  style: ProductStyle | null;
+  thickness: ProductThickness | null;
+  curliness: ProductCurliness | null;
+  inStock: true | null;
+  minPrice: number | null;
+  maxPrice: number | null;
+  sortBy: ProductSort;
+};
+
+export type ProductFilterGroup =
+  | typeof productCategories
+  | typeof productThickness
+  | typeof productCurliness
+  | typeof productStyles
+  | ['В наличии'];
 
 export type ProductRating = {
   id: string;
