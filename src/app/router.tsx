@@ -4,6 +4,7 @@ import { MainLayout } from '../components/layout';
 import { StubPage } from '../pages/_StubPage';
 
 import { ProtectedRoute } from '@/components/protected-route';
+import { CatalogPage } from '@/pages/catalog-page';
 import { LoginPage } from '@/pages/login-page';
 import { RegisterPage } from '@/pages/register-page';
 
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <StubPage title="Каталог" />,
+        element: <CatalogPage />,
       },
       { path: 'product/:id', element: <StubPage title="Продукт ..." /> },
 
