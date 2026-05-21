@@ -1,12 +1,16 @@
+import { useSearchParams } from 'react-router-dom';
+
+import { Breadcrumbs } from '@/components/catalog-page/breadcrumbs';
 import { FilterSidebar } from '@/components/catalog-page/filter-sidebar/filter-sidebar';
 import { useProducts } from '@/hooks/use-products';
 
 export function CatalogPage() {
   const { isLoading, products } = useProducts();
+  const [searchParams] = useSearchParams();
 
   return (
     <div className="flex flex-col gap-5 py-8">
-      <div>breadcrumbs</div>
+      {searchParams.has('category') && <Breadcrumbs />}
       <div className="flex gap-5">
         <FilterSidebar />
         <div className="flex flex-1 flex-col gap-2">
