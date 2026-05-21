@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
@@ -13,8 +13,7 @@ const formSchema = z.object({
 });
 
 export function HeaderSearchbar() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -26,8 +25,10 @@ export function HeaderSearchbar() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     const { query } = data;
-
-    navigate(`/?search=${query}`);
+    setSearchParams((searchParams) => {
+      searchParams.set('search', query);
+      return searchParams;
+    });
   }
 
   return (

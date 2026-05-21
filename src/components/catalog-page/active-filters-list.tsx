@@ -25,7 +25,7 @@ export function ActiveFiltersList() {
   const activeFilters = Array.from(searchParams.entries())
     .filter(
       ([k]) =>
-        !['page', 'sortBy', 'minPrice', 'maxPrice', 'searchTerm'].includes(k),
+        !['page', 'sortBy', 'minPrice', 'maxPrice', 'search'].includes(k),
     )
     .flatMap(([k, v]) =>
       v.includes(',')
