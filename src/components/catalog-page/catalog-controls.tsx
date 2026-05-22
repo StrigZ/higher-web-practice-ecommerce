@@ -42,7 +42,7 @@ export function CatalogControls({ layoutStyle, updateLayoutStyle }: Props) {
         <SelectContent>
           <SelectGroup>
             {productSortingVariants.map((variant) => (
-              <SelectItem value={variant}>
+              <SelectItem key={variant} value={variant}>
                 {sortingVariantToLabelMap[variant]}
               </SelectItem>
             ))}

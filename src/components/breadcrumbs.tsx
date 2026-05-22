@@ -3,7 +3,7 @@ export function Breadcrumbs({ values }: { values: (string | null)[] }) {
     <nav aria-label="breadcrumb">
       <ol className="text-muted-foreground flex items-center gap-2">
         {values.filter(Boolean).map((value) => (
-          <li className="group">
+          <li key={value} className="group">
             <span className="group-first:hidden">/ </span>
             {value}
           </li>
