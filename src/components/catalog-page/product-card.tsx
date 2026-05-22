@@ -22,7 +22,7 @@ export function ProductCard({
   return (
     <Link to={`/product/${id}`}>
       <Card
-        className={cn('relative mx-auto w-full ring-0', {
+        className={cn('relative mx-auto w-full', {
           'max-w-sm gap-y-2 border-none p-0 shadow-none':
             layoutStyle === 'сетка',
           'flex-row gap-x-2 p-4 pt-4!': layoutStyle === 'список',
