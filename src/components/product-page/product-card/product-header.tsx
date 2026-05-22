@@ -1,28 +1,18 @@
-import { useParams } from 'react-router-dom';
-
 import { ProductRating } from './product-rating';
 
-import { useGetProductByIdQuery } from '@/api/products-api';
 import { CardDescription, CardTitle } from '@/components/ui/card';
+import { useProductPageContext } from '@/providers/product-page-context/use-product-page-context';
 
 export function ProductHeader() {
-  const { id } = useParams<{ id: string }>();
-  const { data, isLoading } = useGetProductByIdQuery(
-    { productId: id! },
-    { skip: !id },
-  );
-
-  if (isLoading || !data) {
-    return null;
-  }
+  const { product } = useProductPageContext();
 
   return (
     <div className="flex justify-between">
       <div className="flex flex-col gap-6">
-        <CardTitle>{data.name}</CardTitle>
+        <CardTitle>{product.name}</CardTitle>
         <CardDescription>
           <p className="text-success font-heading text-3xl font-bold">
-            {data.price} ₽
+            {product.price} ₽
           </p>
         </CardDescription>
       </div>

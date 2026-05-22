@@ -8,6 +8,7 @@ import { CatalogPage } from '@/pages/catalog-page';
 import { LoginPage } from '@/pages/login-page';
 import { ProductPage } from '@/pages/product-page';
 import { RegisterPage } from '@/pages/register-page';
+import { ProductPageProvider } from '@/providers/product-page-context/product-page-provider';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,14 @@ const router = createBrowserRouter([
         index: true,
         element: <CatalogPage />,
       },
-      { path: 'product/:id', element: <ProductPage /> },
+      {
+        path: 'product/:id',
+        element: (
+          <ProductPageProvider>
+            <ProductPage />
+          </ProductPageProvider>
+        ),
+      },
 
       {
         path: 'login',
