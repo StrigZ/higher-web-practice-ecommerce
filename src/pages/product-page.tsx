@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 
 import { useGetProductByIdQuery } from '@/api/products-api';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { ProductImageCarousel } from '@/components/product-page/product-image-carousel';
-import { ProductInfo } from '@/components/product-page/product-info';
+import { ProductImageCarousel } from '@/components/product-page/product-card/product-image-carousel';
+import { ProductInfo } from '@/components/product-page/product-card/product-info';
 import { Card } from '@/components/ui/card';
 
 export function ProductPage() {

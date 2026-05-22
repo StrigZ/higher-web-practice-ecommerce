@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 
-import { ShoppingCartButton } from '../cart-button';
+import { ShoppingCartButton } from '../../cart-button';
+
+import { ProductHeader } from './product-header';
 
 import { useGetProductByIdQuery } from '@/api/products-api';
-import { ProductHeader } from '@/components/product-page/product-header';
 import { Separator } from '@/components/ui/separator';
 
 export function ProductInfo() {
