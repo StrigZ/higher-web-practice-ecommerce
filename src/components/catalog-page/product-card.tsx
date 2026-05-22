@@ -1,7 +1,7 @@
-import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import { Button } from '@/components/ui/button';
+import { ShoppingCartButton } from '../cart-button';
+
 import {
   Card,
   CardDescription,
@@ -65,14 +65,12 @@ export function ProductCard({
         </CardHeader>
 
         <CardFooter className="p-0">
-          <Button
+          <ShoppingCartButton
             className={cn('h-10 p-2', {
               'w-full': layoutStyle === 'сетка',
-              'w-[100px]': layoutStyle === 'список',
+              'w-25': layoutStyle === 'список',
             })}
-          >
-            <ShoppingCart className="size-6" />
-          </Button>
+          />
         </CardFooter>
       </Card>
     </Link>
