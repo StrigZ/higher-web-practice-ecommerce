@@ -1,18 +1,13 @@
 import { ShoppingCart, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { useGetUserByIdQuery } from '@/api/users-api';
 import { buttonVariants } from '@/components/ui/button';
+import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { cn } from '@/lib/utils';
-import { selectIsAuth, selectUserId } from '@/store/features/user/user-slice';
-import { useAppSelector } from '@/store/hooks';
 
 export function HeaderNav() {
   const location = useLocation();
-  const isAuth = useAppSelector(selectIsAuth);
-  const userId = useAppSelector(selectUserId);
-
-  const user = useGetUserByIdQuery({ userId: userId ?? '' }, { skip: !userId });
+  const { user } = useGetCurrentUser();
 
   return (
     <div className="flex h-10 flex-1 items-center justify-end gap-4 text-xs">
@@ -24,9 +19,9 @@ export function HeaderNav() {
           })}
           size={16}
         />
-        {isAuth ? user.data?.firstName : 'Войти'}
+        {user ? user.firstName : 'Войти'}
       </Link>
-      {isAuth ? (
+      {user ? (
         <Link className="nav-link" to={'/profile/cart'}>
           <ShoppingCart
             className={cn({
