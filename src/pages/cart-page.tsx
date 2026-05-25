@@ -1,9 +1,10 @@
 import { CartItems } from '@/components/cart-page/cart-items';
 import { CartSummary } from '@/components/cart-page/cart-summary';
-import { useUserCart } from '@/hooks/use-user-cart';
+import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
 
 export function CartPage() {
-  const { isLoading, quantity, totalPrice, cartItems } = useUserCart();
+  const { isLoading, quantity, totalPrice, cartItems } =
+    useGetCurrentUserCart();
 
   if (isLoading) {
     // TODO:add spinner

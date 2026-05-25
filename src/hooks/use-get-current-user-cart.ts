@@ -4,7 +4,7 @@ import { useGetCartQuery } from '@/api/cart-api';
 import { selectUserId } from '@/store/features/user/user-slice';
 import { useAppSelector } from '@/store/hooks';
 
-export function useUserCart() {
+export function useGetCurrentUserCart() {
   const userId = useAppSelector(selectUserId);
   const { data: cartItems, isLoading } = useGetCartQuery(
     { userId: userId! },
