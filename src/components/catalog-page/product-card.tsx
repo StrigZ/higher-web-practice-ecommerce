@@ -12,21 +12,27 @@ import {
 import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
 
-export function ProductCard({
-  images,
-  name,
-  price,
-  id,
-  layoutStyle,
-}: Product & { layoutStyle: 'сетка' | 'список' }) {
+export function ProductCard(
+  props: Product & { layoutStyle: 'сетка' | 'список' },
+) {
+  const { layoutStyle, ...product } = props;
+  const { images, name, price, id } = product;
+
   return (
-    <Link to={`/product/${id}`}>
-      <Card
+    <Card
+      className={cn({
+        'flex flex-row items-center': layoutStyle === 'список',
+        '': layoutStyle === 'сетка',
+      })}
+    >
+      <Link
         className={cn('relative mx-auto w-full', {
-          'max-w-sm gap-y-2 border-none p-0 shadow-none':
+          'max-w-sm gap-y-2 rounded-none border-none p-0 shadow-none':
             layoutStyle === 'сетка',
-          'flex-row gap-x-2 p-4 pt-4!': layoutStyle === 'список',
+          'flex flex-row gap-x-2 rounded-[12px] p-4 pt-4!':
+            layoutStyle === 'список',
         })}
+        to={`/product/${id}`}
       >
         <img
           alt="обложка усов"
@@ -63,16 +69,17 @@ export function ProductCard({
             </p>
           </CardDescription>
         </CardHeader>
+      </Link>
 
-        <CardFooter className="p-0">
-          <ShoppingCartButton
-            className={cn('h-10 p-2', {
-              'w-full': layoutStyle === 'сетка',
-              'w-25': layoutStyle === 'список',
-            })}
-          />
-        </CardFooter>
-      </Card>
-    </Link>
+      <CardFooter className="p-0">
+        <ShoppingCartButton
+          className={cn('h-10 p-2', {
+            'w-full': layoutStyle === 'сетка',
+            'w-25': layoutStyle === 'список',
+          })}
+          product={product}
+        />
+      </CardFooter>
+    </Card>
   );
 }
