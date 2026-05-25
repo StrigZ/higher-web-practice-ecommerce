@@ -1,9 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { MainLayout } from '../components/layout';
 import { StubPage } from '../pages/_StubPage';
 
+import { MainLayout, ProfileLayout } from '@/components/layout';
 import { ProtectedRoute } from '@/components/protected-route';
+import { CartPage } from '@/pages/cart-page';
 import { CatalogPage } from '@/pages/catalog-page';
 import { LoginPage } from '@/pages/login-page';
 import { ProductPage } from '@/pages/product-page';
@@ -27,7 +28,6 @@ const router = createBrowserRouter([
           </ProductPageProvider>
         ),
       },
-
       {
         path: 'login',
         element: (
@@ -46,49 +46,55 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: (
-          <ProtectedRoute access="auth">
-            <StubPage title="Мой профиль" />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: 'profile/edit',
-        element: (
-          <ProtectedRoute access="auth">
-            <StubPage title="Редактирование профиля" />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: 'orders',
-        element: (
-          <ProtectedRoute access="auth">
-            <StubPage title="Мои заказы" />
-          </ProtectedRoute>
-        ),
+        element: <ProfileLayout />,
+        children: [
+          {
+            element: (
+              <ProtectedRoute access="auth">
+                <StubPage title="профиль" />
+              </ProtectedRoute>
+            ),
+            index: true,
+          },
+          {
+            path: 'profile/edit',
+            element: (
+              <ProtectedRoute access="auth">
+                <StubPage title="Редактирование профиля" />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'orders',
+            element: (
+              <ProtectedRoute access="auth">
+                <StubPage title="Мои заказы" />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'order/:id',
+            element: (
+              <ProtectedRoute access="auth">
+                <StubPage title="Заказ ..." />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'cart',
+            element: (
+              <ProtectedRoute access="auth">
+                <CartPage />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
       {
         path: 'checkout',
         element: (
           <ProtectedRoute access="auth">
             <StubPage title="Оформление заказа" />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: 'order/:id',
-        element: (
-          <ProtectedRoute access="auth">
-            <StubPage title="Заказ ..." />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: 'cart',
-        element: (
-          <ProtectedRoute access="auth">
-            <StubPage title="Корзина" />
           </ProtectedRoute>
         ),
       },

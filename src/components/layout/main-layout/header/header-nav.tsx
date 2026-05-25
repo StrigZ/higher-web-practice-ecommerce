@@ -19,17 +19,19 @@ export function HeaderNav() {
       <Link className="nav-link" to={'/profile'}>
         <User
           className={cn({
-            'fill-secondary text-secondary': location.pathname === 'profile',
+            'fill-secondary text-secondary stroke-none':
+              location.pathname === '/profile',
           })}
           size={16}
         />
         {isAuth ? user.data?.firstName : 'Войти'}
       </Link>
       {isAuth ? (
-        <Link className="nav-link" to={'/cart'}>
+        <Link className="nav-link" to={'/profile/cart'}>
           <ShoppingCart
             className={cn({
-              'fill-secondary text-secondary': location.pathname === '/cart',
+              'fill-secondary text-secondary stroke-none':
+                location.pathname === '/profile/cart',
             })}
             size={16}
           />
