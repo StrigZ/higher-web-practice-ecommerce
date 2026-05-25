@@ -1,24 +1,11 @@
-import { useMemo } from 'react';
-
-import { useGetCartQuery } from '@/api/cart-api';
 import { CartItems } from '@/components/cart-page/cart-items';
 import { CartSummary } from '@/components/cart-page/cart-summary';
-import { selectUserId } from '@/store/features/user/user-slice';
-import { useAppSelector } from '@/store/hooks';
+import { useUserCart } from '@/hooks/use-user-cart';
 
 export function CartPage() {
-  const userId = useAppSelector(selectUserId);
-  const { data: cartItems, isLoading } = useGetCartQuery(
-    { userId: userId! },
-    { skip: !userId },
-  );
+  const { isLoading, quantity, totalPrice, cartItems } = useUserCart();
 
-  const totalPrice = useMemo(
-    () => (cartItems ?? []).reduce((prev, curr) => prev + curr.price, 0),
-    [cartItems],
-  );
-
-  if (isLoading || !cartItems) {
+  if (isLoading) {
     // TODO:add spinner
     return <p>loading</p>;
   }
@@ -29,7 +16,7 @@ export function CartPage() {
       <div className="flex justify-between gap-5 overflow-hidden">
         <CartItems items={cartItems} />
         {cartItems.length > 0 && (
-          <CartSummary quantity={cartItems.length} totalPrice={totalPrice} />
+          <CartSummary quantity={quantity} totalPrice={totalPrice} />
         )}
       </div>
     </div>
