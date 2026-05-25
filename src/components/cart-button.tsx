@@ -1,4 +1,4 @@
-import { Minus, Plus, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { Button } from './ui/button';
@@ -25,9 +25,14 @@ export function ShoppingCartButton({
 }) {
   const userId = useAppSelector(selectUserId);
 
-  const [addItem] = useAddItemMutation();
-  const [updateItemQuantity] = useUpdateItemQuantityMutation();
-  const [removeItem] = useRemoveItemMutation();
+  const [addItem, { isLoading: isAddMutationLoading }] = useAddItemMutation();
+  const [updateItemQuantity, { isLoading: isUpdateMutationLoading }] =
+    useUpdateItemQuantityMutation();
+  const [removeItem, { isLoading: isRemoveMutationLoading }] =
+    useRemoveItemMutation();
+
+  const isMutationLoading =
+    isAddMutationLoading || isUpdateMutationLoading || isRemoveMutationLoading;
 
   const { data: cartItems } = useGetCartQuery(
     { userId: userId! },
@@ -74,17 +79,33 @@ export function ShoppingCartButton({
   if (!userId) return null;
 
   return cartItem ? (
-    <div className="flex w-full flex-1 items-center gap-2">
-      <Button className="flex-1" onClick={handleDecrementItem}>
-        <Minus />
+    <div className="flex w-full flex-1 items-center justify-center gap-2">
+      <Button
+        className="h-10 w-10 rounded-sm text-sm"
+        disabled={isMutationLoading}
+        variant={'ghost'}
+        onClick={handleDecrementItem}
+      >
+        -
       </Button>
-      <span>{cartItem.quantity}</span>
-      <Button className="flex-1" onClick={handleAddItem}>
-        <Plus />
+      <span className="font-heading text-xl font-bold">
+        {cartItem.quantity}
+      </span>
+      <Button
+        className="h-10 w-10 rounded-sm text-sm"
+        disabled={isMutationLoading}
+        variant={'ghost'}
+        onClick={handleAddItem}
+      >
+        +
       </Button>
     </div>
   ) : (
-    <Button className={cn('h-10 p-2', className)} onClick={handleAddItem}>
+    <Button
+      className={cn('h-10 p-2', className)}
+      disabled={isMutationLoading}
+      onClick={handleAddItem}
+    >
       <ShoppingCart className="size-6" />
     </Button>
   );
