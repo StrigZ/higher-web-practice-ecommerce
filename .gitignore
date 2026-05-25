@@ -27,3 +27,5 @@ coverage
 # Env 
 .env
 .env.local
+
+db.json
