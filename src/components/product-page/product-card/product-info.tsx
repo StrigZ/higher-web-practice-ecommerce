@@ -13,7 +13,7 @@ export function ProductInfo() {
       <ProductHeader />
 
       <div className="flex items-end justify-between">
-        <ShoppingCartButton className="w-45" />
+        <ShoppingCartButton className="w-45" product={product} />
         <span className="text-muted-foreground text-base">
           {product.inStock ? 'Есть' : 'Нет'} в наличии
         </span>
