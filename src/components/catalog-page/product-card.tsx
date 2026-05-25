@@ -22,7 +22,6 @@ export function ProductCard(
     <Card
       className={cn({
         'flex flex-row items-center': layoutStyle === 'список',
-        '': layoutStyle === 'сетка',
       })}
     >
       <Link
