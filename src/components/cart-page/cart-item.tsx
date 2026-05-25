@@ -27,14 +27,19 @@ export function CartItem({
   if (isLoading || !product) return null;
 
   return (
-    <Card className="flex flex-row items-center gap-x-8 rounded-[12px] p-4">
-      <Link className="flex items-center gap-2" to={`/product/${productId}`}>
+    <Card className="grid grid-cols-[1fr_100px_80px_40px] items-center justify-center gap-x-8 rounded-[12px] p-4">
+      <Link
+        className="grid grid-cols-[80px_1fr] items-center gap-2"
+        to={`/product/${productId}`}
+      >
         <img
           alt="обложка усов"
           className="relative z-20 aspect-square h-[80px] object-cover"
           src={product.images[0]}
         />
-        <p className="text-secondary text-base font-normal">{product.name}</p>
+        <p className="text-secondary flex-1 text-base font-normal">
+          {product.name}
+        </p>
       </Link>
       <ShoppingCartButton product={product} />
 
