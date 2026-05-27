@@ -5,7 +5,7 @@ import { Separator } from '../ui/separator';
 import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
 
 export function OrderSummary() {
-  const { cartItems, quantity, totalPrice } = useGetCurrentUserCart();
+  const { quantity, totalPrice } = useGetCurrentUserCart();
 
   return (
     <Card className="h-fit flex-1 gap-4 p-4 pt-5">

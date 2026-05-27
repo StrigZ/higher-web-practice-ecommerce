@@ -1,37 +1,26 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { useCreateOrderMutation } from '@/api/orders-api';
-import { CustomerInfoForm } from '@/components/checkout-page/customer-info-form';
+import { CustomerInfo } from '@/components/checkout-page/customer-info';
 import { DeliveryMethodPicker } from '@/components/checkout-page/delivery-method-picker/delivery-method-picker';
 import { OrderSummary } from '@/components/checkout-page/order-summary';
 import { PaymentMethodPicker } from '@/components/checkout-page/payment-method-picker';
 import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
+import { cities, pickupPoints } from '@/lib/constants';
 import {
-  cities,
-  deliveryMethods,
-  paymentMethods,
-  pickupPoints,
-} from '@/lib/constants';
+  formSchema,
+  type CheckoutFormValues,
+} from '@/lib/form-schemas/order-form-schema';
 
-const formSchema = z.object({
-  paymentMethod: z.enum(paymentMethods),
-  deliveryMethod: z.enum(deliveryMethods),
-  city: z.string(),
-  address: z.string(),
-  pickupPoint: z.string(),
-  phone: z.string(),
-  comment: z.string().optional(),
-});
 export function CheckoutPage() {
   const { user } = useGetCurrentUser();
   const { cartItems, quantity, totalPrice } = useGetCurrentUserCart();
 
   const [createOrder] = useCreateOrderMutation();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       paymentMethod: 'card_online',
@@ -44,7 +33,7 @@ export function CheckoutPage() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  function onSubmit(data: CheckoutFormValues) {
     console.log(data);
 
     if (!user) return;
@@ -85,8 +74,7 @@ export function CheckoutPage() {
           active={form.watch('deliveryMethod')}
           control={form.control}
         />
-
-        <CustomerInfoForm />
+        <CustomerInfo control={form.control} />
       </div>
       <OrderSummary />
     </form>

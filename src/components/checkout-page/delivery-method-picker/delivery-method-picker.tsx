@@ -1,7 +1,6 @@
 import { addDays, format } from 'date-fns';
-import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { Controller } from 'react-hook-form';
+import { Controller, type Control } from 'react-hook-form';
 
 import { AddressInput } from './address-input';
 import { PickupPointPicker } from './pickup-point-picker';
@@ -9,6 +8,7 @@ import { PickupPointPicker } from './pickup-point-picker';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Field, FieldError } from '@/components/ui/field';
+import type { CheckoutFormValues } from '@/lib/form-schemas/order-form-schema';
 import { cn } from '@/lib/utils';
 import type { DeliveryMethod } from '@/types';
 
@@ -24,13 +24,15 @@ const deliveryMethodData: { method: DeliveryMethod; label: string }[] = [
 ];
 
 const sevenDaysFromNow = addDays(new Date(), 7);
-const formattedDate = format(sevenDaysFromNow, 'yyyy-MM-dd', { locale: ru });
+const formattedDate = format(sevenDaysFromNow, "d MMMM yyyy 'г.'", {
+  locale: ru,
+});
 
 export function DeliveryMethodPicker({
   control,
   active,
 }: {
-  control;
+  control: Control<CheckoutFormValues>;
   active: DeliveryMethod;
 }) {
   return (

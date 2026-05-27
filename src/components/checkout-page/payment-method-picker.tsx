@@ -1,9 +1,10 @@
-import { Controller } from 'react-hook-form';
+import { Controller, type Control } from 'react-hook-form';
 
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 
 import { Field, FieldError } from '@/components/ui/field';
+import type { CheckoutFormValues } from '@/lib/form-schemas/order-form-schema';
 import { cn } from '@/lib/utils';
 import type { PaymentMethod } from '@/types';
 
@@ -26,7 +27,7 @@ export function PaymentMethodPicker({
   control,
   active,
 }: {
-  control;
+  control: Control<CheckoutFormValues>;
   active: PaymentMethod;
 }) {
   return (
