@@ -2,43 +2,10 @@ import { Button } from '../ui/button';
 import { Card } from '../ui/card';
 import { Separator } from '../ui/separator';
 
-import { useCreateOrderMutation } from '@/api/orders-api';
-import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
 
 export function OrderSummary() {
   const { cartItems, quantity, totalPrice } = useGetCurrentUserCart();
-
-  const { user } = useGetCurrentUser();
-
-  const [createOrder] = useCreateOrderMutation();
-
-  const handleConfirmOrder = () => {
-    if (!user) return;
-
-    //   TODO: get from form
-    createOrder({
-      createdAt: new Date().toISOString(),
-      items: cartItems,
-      userId: user.id,
-      totalPrice,
-      status: 'processing',
-
-      customer: { ...user, phone: user.phone ?? '' },
-      deliveryMethod: 'courier',
-      paymentMethod: 'card_on_delivery',
-      comment: 'test',
-      deliveryAddress: {
-        country: 'string',
-        city: 'string',
-        street: 'string',
-        house: 'string',
-        apartment: 'string',
-        postalCode: 'string',
-      },
-      pickupPointId: 'test',
-    });
-  };
 
   return (
     <Card className="h-fit flex-1 gap-4 p-4 pt-5">
@@ -64,7 +31,7 @@ export function OrderSummary() {
           {totalPrice} ₽
         </p>
       </div>
-      <Button onClick={handleConfirmOrder}>Оплатить</Button>
+      <Button type="submit">Оплатить</Button>
     </Card>
   );
 }

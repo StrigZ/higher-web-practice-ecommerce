@@ -1,17 +1,94 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+
+import { useCreateOrderMutation } from '@/api/orders-api';
 import { CustomerInfoForm } from '@/components/checkout-page/customer-info-form';
-import { DeliveryMethodPicker } from '@/components/checkout-page/delivery-method-picker';
+import { DeliveryMethodPicker } from '@/components/checkout-page/delivery-method-picker/delivery-method-picker';
 import { OrderSummary } from '@/components/checkout-page/order-summary';
 import { PaymentMethodPicker } from '@/components/checkout-page/payment-method-picker';
+import { useGetCurrentUser } from '@/hooks/use-get-current-user';
+import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
+import {
+  cities,
+  deliveryMethods,
+  paymentMethods,
+  pickupPoints,
+} from '@/lib/constants';
 
+const formSchema = z.object({
+  paymentMethod: z.enum(paymentMethods),
+  deliveryMethod: z.enum(deliveryMethods),
+  city: z.string(),
+  address: z.string(),
+  pickupPoint: z.string(),
+  phone: z.string(),
+  comment: z.string().optional(),
+});
 export function CheckoutPage() {
+  const { user } = useGetCurrentUser();
+  const { cartItems, quantity, totalPrice } = useGetCurrentUserCart();
+
+  const [createOrder] = useCreateOrderMutation();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      paymentMethod: 'card_online',
+      deliveryMethod: 'courier',
+      phone: user?.phone ?? '',
+      comment: '',
+      address: '',
+      pickupPoint: pickupPoints[0].id,
+      city: cities[0],
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    console.log(data);
+
+    if (!user) return;
+
+    // createOrder({
+    //   userId: user.id,
+    //   createdAt: new Date().toISOString(),
+    //   items: cartItems,
+    //   totalPrice,
+    //   status: 'processing',
+
+    //   customer: { ...user, phone: data.phone },
+    //   deliveryMethod: 'courier',
+    //   paymentMethod: 'card_on_delivery',
+    //   comment: 'test',
+    //   deliveryAddress: {
+    //     country: 'string',
+    //     city: 'string',
+    //     street: 'string',
+    //     house: 'string',
+    //     apartment: 'string',
+    //     postalCode: 'string',
+    //   },
+    //   pickupPointId: 'test',
+    // });
+  }
   return (
-    <div className="flex items-start gap-5 py-10">
+    <form
+      className="flex items-start gap-5 py-10"
+      onSubmit={form.handleSubmit(onSubmit)}
+    >
       <div className="flex w-145 flex-col gap-6">
-        <PaymentMethodPicker />
-        <DeliveryMethodPicker />
+        <PaymentMethodPicker
+          active={form.watch('paymentMethod')}
+          control={form.control}
+        />
+        <DeliveryMethodPicker
+          active={form.watch('deliveryMethod')}
+          control={form.control}
+        />
+
         <CustomerInfoForm />
       </div>
       <OrderSummary />
-    </div>
+    </form>
   );
 }

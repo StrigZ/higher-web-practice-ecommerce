@@ -1,9 +1,12 @@
+import type { CartItem } from './cart';
+
+import type { deliveryMethods, paymentMethods } from '@/lib/constants';
+
 export type Order = {
   id: string;
-  number: string;
   userId: string;
   status: OrderStatus;
-  items: OrderItem[];
+  items: CartItem[];
   totalPrice: number;
 
   paymentMethod: PaymentMethod;
@@ -21,8 +24,6 @@ export type Order = {
 
 export type OrderItem = {
   productId: string;
-  name: string;
-  image: string;
   price: number;
   quantity: number;
 };
@@ -35,17 +36,12 @@ export type OrderStatus =
   | 'delivered'
   | 'cancelled';
 
-export type PaymentMethod = 'card_online' | 'card_on_delivery' | 'cash';
+export type PaymentMethod = (typeof paymentMethods)[number];
 
-export type DeliveryMethod = 'courier' | 'pickup_point';
+export type DeliveryMethod = (typeof deliveryMethods)[number];
 
 export type Address = {
-  country: string;
   city: string;
-  street: string;
-  house: string;
-  apartment?: string;
-  postalCode?: string;
 };
 
 export type PickupPoint = {
