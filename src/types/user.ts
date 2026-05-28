@@ -1,16 +1,18 @@
+import type { userLanguages } from '@/lib/constants';
+
 export type User = {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone?: string;
-  language?: 'ru' | 'en';
+  language?: UserLanguage;
   notifyByEmail?: boolean;
   createdAt: string;
 };
 
 export type UserProfile = User;
-
+export type UserLanguage = (typeof userLanguages)[number];
 export type RegisterPayload = {
   firstName: string;
   lastName: string;

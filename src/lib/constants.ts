@@ -61,3 +61,5 @@ export const pickupPoints = [
 ] as const;
 
 export const cities = ['Москва', 'Санкт-Петербург'] as const;
+
+export const userLanguages = ['ru', 'en'] as const;
