@@ -73,14 +73,7 @@ const router = createBrowserRouter([
               </ProtectedRoute>
             ),
           },
-          {
-            path: 'order/:id',
-            element: (
-              <ProtectedRoute access="auth">
-                <StubPage title="Заказ ..." />
-              </ProtectedRoute>
-            ),
-          },
+
           {
             path: 'cart',
             element: (
@@ -96,6 +89,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute access="auth">
             <CheckoutPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'order/:id',
+        element: (
+          <ProtectedRoute access="auth">
+            <StubPage title="Заказ ..." />
           </ProtectedRoute>
         ),
       },

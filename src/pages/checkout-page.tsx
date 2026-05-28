@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { useCreateOrderMutation } from '@/api/orders-api';
 import { CustomerInfo } from '@/components/checkout-page/customer-info';
@@ -16,8 +17,9 @@ import {
 } from '@/lib/form-schemas/order-form-schema';
 
 export function CheckoutPage() {
+  const navigate = useNavigate();
   const { user } = useGetCurrentUser();
-  const { cartItems, totalPrice } = useGetCurrentUserCart();
+  const { cartItems, totalPrice, clearCart } = useGetCurrentUserCart();
 
   const [createOrder] = useCreateOrderMutation();
 
@@ -47,10 +49,10 @@ export function CheckoutPage() {
     form.setValue('phone', user.phone ?? '');
   }, [form, user]);
 
-  function onSubmit(data: CheckoutFormValues) {
+  async function onSubmit(data: CheckoutFormValues) {
     if (!user) return;
 
-    createOrder({
+    const { data: newOrder } = await createOrder({
       userId: user.id,
       createdAt: new Date().toISOString(),
       items: cartItems,
@@ -64,6 +66,11 @@ export function CheckoutPage() {
         ? { deliveryAddress: `г. ${data.city}, ${data.address}` }
         : { pickupPointId: data.pickupPoint }),
     });
+
+    if (newOrder) {
+      await clearCart();
+      navigate(`/order/${newOrder.id}`, { state: { isNewOrder: true } });
+    }
   }
   return (
     <form
