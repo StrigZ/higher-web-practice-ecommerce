@@ -8,6 +8,7 @@ import { CartPage } from '@/pages/cart-page';
 import { CatalogPage } from '@/pages/catalog-page';
 import { CheckoutPage } from '@/pages/checkout-page';
 import { LoginPage } from '@/pages/login-page';
+import { OrderHistoryPage } from '@/pages/order-history-page';
 import { OrderPage } from '@/pages/order-page';
 import { ProductPage } from '@/pages/product-page';
 import { RegisterPage } from '@/pages/register-page';
@@ -70,7 +71,7 @@ const router = createBrowserRouter([
             path: 'orders',
             element: (
               <ProtectedRoute access="auth">
-                <StubPage title="Мои заказы" />
+                <OrderHistoryPage />
               </ProtectedRoute>
             ),
           },
