@@ -42,6 +42,17 @@ export const cartApi = createApi({
       }),
       invalidatesTags: ['Cart'],
     }),
+    clearCart: builder.mutation<void, { userId: string; itemIds: string[] }>({
+      async queryFn({ itemIds }, _api, _extraOptions, baseQuery) {
+        await Promise.all(
+          itemIds.map((id) =>
+            baseQuery({ url: `${API_URL}/${id}`, method: 'DELETE' }),
+          ),
+        );
+        return { data: undefined };
+      },
+      invalidatesTags: ['Cart'],
+    }),
   }),
 });
 
@@ -50,4 +61,5 @@ export const {
   useAddItemMutation,
   useUpdateItemQuantityMutation,
   useRemoveItemMutation,
+  useClearCartMutation,
 } = cartApi;
