@@ -10,6 +10,7 @@ export function useGetCurrentUser() {
   );
 
   return {
+    userId,
     user,
   };
 }
