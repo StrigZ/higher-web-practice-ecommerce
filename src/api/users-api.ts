@@ -80,4 +80,5 @@ export const {
   useLazyLoginQuery,
   useRegisterUserMutation,
   useLazyGetUserByEmailQuery,
+  useUpdateUserMutation,
 } = usersApi;
