@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { useCreateOrderMutation } from '@/api/orders-api';
 import { CustomerInfo } from '@/components/checkout-page/customer-info';
@@ -16,7 +17,7 @@ import {
 
 export function CheckoutPage() {
   const { user } = useGetCurrentUser();
-  const { cartItems, quantity, totalPrice } = useGetCurrentUserCart();
+  const { cartItems, totalPrice } = useGetCurrentUserCart();
 
   const [createOrder] = useCreateOrderMutation();
 
@@ -27,38 +28,42 @@ export function CheckoutPage() {
       deliveryMethod: 'courier',
       phone: user?.phone ?? '',
       comment: '',
-      address: '',
       pickupPoint: pickupPoints[0].id,
+      address: '',
       city: cities[0],
     },
   });
+  const paymentMethod = useWatch({
+    control: form.control,
+    name: 'paymentMethod',
+  });
+  const deliveryMethod = useWatch({
+    control: form.control,
+    name: 'deliveryMethod',
+  });
+
+  useEffect(() => {
+    if (!user) return;
+    form.setValue('phone', user.phone ?? '');
+  }, [form, user]);
 
   function onSubmit(data: CheckoutFormValues) {
-    console.log(data);
-
     if (!user) return;
 
-    // createOrder({
-    //   userId: user.id,
-    //   createdAt: new Date().toISOString(),
-    //   items: cartItems,
-    //   totalPrice,
-    //   status: 'processing',
-
-    //   customer: { ...user, phone: data.phone },
-    //   deliveryMethod: 'courier',
-    //   paymentMethod: 'card_on_delivery',
-    //   comment: 'test',
-    //   deliveryAddress: {
-    //     country: 'string',
-    //     city: 'string',
-    //     street: 'string',
-    //     house: 'string',
-    //     apartment: 'string',
-    //     postalCode: 'string',
-    //   },
-    //   pickupPointId: 'test',
-    // });
+    createOrder({
+      userId: user.id,
+      createdAt: new Date().toISOString(),
+      items: cartItems,
+      totalPrice,
+      status: 'processing',
+      customer: { ...user, phone: data.phone },
+      deliveryMethod: data.deliveryMethod,
+      paymentMethod: data.paymentMethod,
+      comment: data.comment,
+      ...(data.deliveryMethod === 'courier'
+        ? { deliveryAddress: `г. ${data.city}, ${data.address}` }
+        : { pickupPointId: data.pickupPoint }),
+    });
   }
   return (
     <form
@@ -66,14 +71,8 @@ export function CheckoutPage() {
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <div className="flex w-145 flex-col gap-6">
-        <PaymentMethodPicker
-          active={form.watch('paymentMethod')}
-          control={form.control}
-        />
-        <DeliveryMethodPicker
-          active={form.watch('deliveryMethod')}
-          control={form.control}
-        />
+        <PaymentMethodPicker active={paymentMethod} control={form.control} />
+        <DeliveryMethodPicker active={deliveryMethod} control={form.control} />
         <CustomerInfo control={form.control} />
       </div>
       <OrderSummary />

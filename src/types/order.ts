@@ -12,7 +12,7 @@ export type Order = {
   paymentMethod: PaymentMethod;
   deliveryMethod: DeliveryMethod;
 
-  deliveryAddress?: Address;
+  deliveryAddress?: string;
   pickupPointId?: string;
 
   customer: OrderCustomerInfo;
@@ -40,10 +40,6 @@ export type PaymentMethod = (typeof paymentMethods)[number];
 
 export type DeliveryMethod = (typeof deliveryMethods)[number];
 
-export type Address = {
-  city: string;
-};
-
 export type PickupPoint = {
   id: string;
   name: string;
@@ -64,6 +60,6 @@ export type CreateOrderPayload = {
   paymentMethod: PaymentMethod;
   deliveryMethod: DeliveryMethod;
 
-  deliveryAddress?: Address;
+  deliveryAddress?: string;
   pickupPointId?: string;
 };

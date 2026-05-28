@@ -1,4 +1,4 @@
-import { Controller } from 'react-hook-form';
+import { Controller, type Control } from 'react-hook-form';
 
 import { Field, FieldGroup, FieldLabel } from '../../ui/field';
 import { Input } from '../../ui/input';
@@ -12,8 +12,13 @@ import {
 } from '../../ui/select';
 
 import { cities } from '@/lib/constants';
+import type { CheckoutFormValues } from '@/lib/form-schemas/order-form-schema';
 
-export function AddressInput({ control }: { control }) {
+export function AddressInput({
+  control,
+}: {
+  control: Control<CheckoutFormValues>;
+}) {
   return (
     <FieldGroup className="gap-2">
       <FieldLabel className="text-foreground text-base">

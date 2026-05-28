@@ -1,4 +1,4 @@
-import { Controller } from 'react-hook-form';
+import { Controller, type Control } from 'react-hook-form';
 
 import { Field } from '@/components/ui/field';
 import {
@@ -10,8 +10,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { pickupPoints } from '@/lib/constants';
+import type { CheckoutFormValues } from '@/lib/form-schemas/order-form-schema';
 
-export function PickupPointPicker({ control }: { control }) {
+export function PickupPointPicker({
+  control,
+}: {
+  control: Control<CheckoutFormValues>;
+}) {
   return (
     <Controller
       control={control}
