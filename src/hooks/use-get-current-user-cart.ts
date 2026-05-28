@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useGetCartQuery } from '@/api/cart-api';
+import { useClearCartMutation, useGetCartQuery } from '@/api/cart-api';
 import { selectUserId } from '@/store/features/user/user-slice';
 import { useAppSelector } from '@/store/hooks';
 
@@ -16,10 +16,21 @@ export function useGetCurrentUserCart() {
     [cartItems],
   );
 
+  const [clearCartMutation] = useClearCartMutation();
+
+  async function clearCart() {
+    if (!userId || !cartItems) return;
+
+    await clearCartMutation({
+      userId,
+      itemIds: cartItems.map((item) => item.id),
+    });
+  }
   return {
     quantity: cartItems ? cartItems.length : 0,
     totalPrice,
     cartItems: cartItems ?? [],
     isLoading,
+    clearCart,
   };
 }
