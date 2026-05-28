@@ -11,6 +11,7 @@ import { LoginPage } from '@/pages/login-page';
 import { OrderHistoryPage } from '@/pages/order-history-page';
 import { OrderPage } from '@/pages/order-page';
 import { ProductPage } from '@/pages/product-page';
+import { ProfilePage } from '@/pages/profile-page';
 import { RegisterPage } from '@/pages/register-page';
 import { ProductPageProvider } from '@/providers/product-page-context/product-page-provider';
 
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
           {
             element: (
               <ProtectedRoute access="auth">
-                <StubPage title="профиль" />
+                <ProfilePage />
               </ProtectedRoute>
             ),
             index: true,
