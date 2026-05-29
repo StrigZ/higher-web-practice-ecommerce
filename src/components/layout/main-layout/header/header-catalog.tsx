@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -9,10 +10,19 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { productCategories } from '@/lib/constants';
+import type { ProductCategory } from '@/types';
 
 export function HeaderCatalog() {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category: ProductCategory) => {
+    setIsOpen(false);
+    navigate(`/?category=${category}`);
+  };
+
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button className="h-full cursor-pointer rounded-sm px-4 py-2 text-base font-bold">
           Каталог
@@ -24,13 +34,14 @@ export function HeaderCatalog() {
         </PopoverHeader>
         <ul className="flex flex-col gap-2">
           {productCategories.map((category) => (
-            <li>
-              <Link
-                className="hover:text-secondary hover:bg-muted block w-full rounded-sm px-4 py-2 text-base"
-                to={`/?category=${category}`}
+            <li key={category}>
+              <Button
+                className="hover:text-secondary w-full justify-start text-base"
+                variant={'ghost'}
+                onClick={() => handleCategoryClick(category)}
               >
                 {category}
-              </Link>
+              </Button>
             </li>
           ))}
         </ul>
