@@ -19,12 +19,11 @@ export function HeaderSearchbar() {
     defaultValues: {
       query: searchParams.get('search') ?? '',
     },
-    mode: 'onSubmit',
+    mode: 'onChange',
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     const { query } = data;
-    if (!query) return;
 
     setSearchParams((searchParams) => {
       searchParams.set('search', query);
@@ -34,19 +33,20 @@ export function HeaderSearchbar() {
 
   return (
     <form
-      className="group relative flex h-10 max-w-142 flex-1 items-center rounded-md"
+      className="group relative flex h-10 flex-1 items-center rounded-md md:max-w-142"
       onSubmit={form.handleSubmit(onSubmit)}
     >
+      <Search className="text-muted-foreground absolute left-2 size-4 md:hidden" />
       <Input
         {...form.register('query')}
         aria-invalid={!!form.formState.errors.query}
         autoComplete="off"
-        className="border-primary h-full rounded-md rounded-r-none border-2 transition-colors placeholder:text-base focus-visible:ring-0"
+        className="border-primary h-full rounded-md border-2 pl-8 transition-colors placeholder:text-sm focus-visible:ring-0 md:rounded-r-none md:pl-2 md:placeholder:text-base"
         placeholder="Искать"
       />
 
       <Button
-        className="group-focus-within:bg-secondary h-full shrink-0 rounded-l-none border-none px-6 transition-colors"
+        className="group-focus-within:bg-secondary hidden h-full shrink-0 rounded-l-none border-none px-6 transition-colors md:flex"
         type="submit"
       >
         <Search className="size-6" />

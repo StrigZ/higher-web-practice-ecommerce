@@ -10,7 +10,7 @@ export function HeaderNav() {
   const { user } = useGetCurrentUser();
 
   return (
-    <div className="flex h-10 flex-1 items-center justify-end gap-4 text-xs">
+    <div className="hidden h-10 flex-1 items-center justify-end gap-4 text-xs md:flex">
       <Link className="nav-link" to={'/profile'}>
         <User
           className={cn({
