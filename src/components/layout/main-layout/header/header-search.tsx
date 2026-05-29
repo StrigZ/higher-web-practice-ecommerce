@@ -26,7 +26,11 @@ export function HeaderSearchbar() {
     const { query } = data;
 
     setSearchParams((searchParams) => {
-      searchParams.set('search', query);
+      if (query) {
+        searchParams.set('search', query);
+      } else {
+        searchParams.delete('search');
+      }
       return searchParams;
     });
   }
