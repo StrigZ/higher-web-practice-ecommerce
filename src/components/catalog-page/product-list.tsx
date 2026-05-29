@@ -45,11 +45,17 @@ export function ProductList({
           'grid-cols-1 gap-2': layoutStyle === 'список',
         })}
       >
-        {paginated.map((product) => (
-          <li key={product.id}>
-            <ProductCard {...product} layoutStyle={layoutStyle} />
-          </li>
-        ))}
+        {paginated.length > 0 ? (
+          paginated.map((product) => (
+            <li key={product.id}>
+              <ProductCard {...product} layoutStyle={layoutStyle} />
+            </li>
+          ))
+        ) : (
+          <p className="col-span-full row-span-full self-center justify-self-center">
+            Ничего не найдено
+          </p>
+        )}
       </ul>
       {totalPages > 1 && (
         <Pagination className="justify-start">
