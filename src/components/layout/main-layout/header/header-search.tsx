@@ -5,11 +5,10 @@ import { useSearchParams } from 'react-router-dom';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { FieldError } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
-  query: z.string().min(1, 'Запрос не может быть пустым.').trim(),
+  query: z.string(),
 });
 
 export function HeaderSearchbar() {
@@ -25,6 +24,8 @@ export function HeaderSearchbar() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     const { query } = data;
+    if (!query) return;
+
     setSearchParams((searchParams) => {
       searchParams.set('search', query);
       return searchParams;
@@ -43,12 +44,6 @@ export function HeaderSearchbar() {
         className="border-primary h-full rounded-md rounded-r-none border-2 transition-colors placeholder:text-base focus-visible:ring-0"
         placeholder="Искать"
       />
-      {form.formState.errors.query && (
-        <FieldError
-          className="absolute -bottom-6"
-          errors={[form.formState.errors.query]}
-        />
-      )}
 
       <Button
         className="group-focus-within:bg-secondary h-full shrink-0 rounded-l-none border-none px-6 transition-colors"
