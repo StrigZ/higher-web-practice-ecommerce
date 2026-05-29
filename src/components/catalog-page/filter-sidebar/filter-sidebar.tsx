@@ -20,7 +20,7 @@ export function FilterSidebar({
   return (
     <Card className={cn('h-full p-0 md:h-fit', classNames)}>
       <CardContent className="flex flex-col gap-5 overflow-y-auto p-5 pt-0 md:p-6">
-        <FilterCategories classNames="order-2 md:order-1" />
+        <FilterCategories className="order-2 md:order-1" />
         <FilterGroups classNames="order-2 md:order-1" />
         <FilterPrice classNames="order-1 md:order-2" />
 

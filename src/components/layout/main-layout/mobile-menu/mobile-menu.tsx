@@ -9,8 +9,13 @@ export function MobileMenu({ className }: { className?: string }) {
   const { user } = useGetCurrentUser();
 
   return (
-    <div className={cn('z-50 border-t bg-white px-5 py-2 shadow', className)}>
-      {user ? <MobileNav /> : <HeaderNav className="h-auto justify-start" />}
+    <div
+      className={cn(
+        'sticky bottom-0 z-50 h-14 border-t bg-white px-5 py-2 shadow md:hidden',
+        className,
+      )}
+    >
+      {user ? <MobileNav /> : <HeaderNav className="h-full justify-start" />}
     </div>
   );
 }

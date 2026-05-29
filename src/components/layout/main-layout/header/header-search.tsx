@@ -6,12 +6,13 @@ import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   query: z.string(),
 });
 
-export function HeaderSearchbar() {
+export function HeaderSearchbar({ className }: { className?: string }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,7 +38,10 @@ export function HeaderSearchbar() {
 
   return (
     <form
-      className="group relative flex h-10 flex-1 items-center rounded-md md:max-w-142"
+      className={cn(
+        'group relative flex h-10 items-center rounded-md',
+        className,
+      )}
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <Search className="text-muted-foreground absolute left-2 size-4 md:hidden" />

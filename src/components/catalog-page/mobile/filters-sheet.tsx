@@ -24,8 +24,10 @@ export function FiltersSheet() {
   };
 
   const handleSheetClose = () => {
-    setSearchParams(new URLSearchParams(initialParams));
     setIsOpen(false);
+    setTimeout(() => {
+      setSearchParams(new URLSearchParams(initialParams));
+    }, 300);
   };
 
   return (

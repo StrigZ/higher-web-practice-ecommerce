@@ -6,6 +6,8 @@ import { ActiveFiltersList } from '@/components/catalog-page/active-filters-list
 import { CatalogControls } from '@/components/catalog-page/catalog-controls';
 import { FilterSidebar } from '@/components/catalog-page/filter-sidebar/filter-sidebar';
 import { ProductList } from '@/components/catalog-page/product-list';
+import { HeaderSearchbar } from '@/components/layout/main-layout/header/header-search';
+import { MobileMenu } from '@/components/layout/main-layout/mobile-menu/mobile-menu';
 
 export function CatalogPage() {
   const [searchParams] = useSearchParams();
@@ -13,7 +15,10 @@ export function CatalogPage() {
   const [layoutStyle, setLayoutStyle] = useState<'сетка' | 'список'>('сетка');
 
   return (
-    <div className="mx-auto flex h-full max-w-295 flex-col gap-3 p-5 pt-3 md:gap-x-5 md:py-8">
+    <div className="mx-auto flex h-full flex-col gap-3 overflow-y-auto md:max-w-295 md:gap-5">
+      <div className="px-5 pt-5 md:hidden">
+        <HeaderSearchbar />
+      </div>
       {searchParams.has('category') && (
         <Breadcrumbs
           values={[
@@ -23,7 +28,8 @@ export function CatalogPage() {
           ]}
         />
       )}
-      <div className="flex gap-5 pb-4">
+
+      <div className="flex flex-1 gap-5 overflow-y-auto px-5 md:py-8">
         <FilterSidebar classNames="hidden md:flex md:bg-white" />
         <div className="flex flex-1 flex-col gap-2">
           <header className="flex justify-between">
@@ -37,6 +43,8 @@ export function CatalogPage() {
           <ProductList layoutStyle={layoutStyle} />
         </div>
       </div>
+
+      <MobileMenu />
     </div>
   );
 }

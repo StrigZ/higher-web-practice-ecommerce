@@ -1,27 +1,26 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useGetProductsQuery } from '@/api/products-api';
 import { Button } from '@/components/ui/button';
+import { useGetProducts } from '@/hooks/use-get-products';
 import { productCategories } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
-export function FilterCategories({ classNames }: { classNames?: string }) {
+export function FilterCategories({ className }: { className?: string }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category');
-
-  const { data: allProducts, isLoading } = useGetProductsQuery();
+  const { isLoading, products } = useGetProducts();
 
   const subcategories = useMemo(
     () =>
       Array.from(
         new Set(
-          allProducts
+          products
             ?.filter((p) => p.characteristics['категория'] === selectedCategory)
             .map(({ characteristics }) => characteristics['подкатегория']),
         ),
       ) ?? [],
-    [allProducts, selectedCategory],
+    [products, selectedCategory],
   );
 
   if (isLoading) {
@@ -33,7 +32,7 @@ export function FilterCategories({ classNames }: { classNames?: string }) {
     <div
       className={cn(
         'flex flex-col gap-2 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none',
-        classNames,
+        className,
       )}
     >
       {!!selectedCategory && (
