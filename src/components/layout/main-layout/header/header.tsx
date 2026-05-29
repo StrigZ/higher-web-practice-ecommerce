@@ -5,15 +5,15 @@ import { HeaderSearchbar } from './header-search';
 
 export function Header() {
   return (
-    <header className="bg-card">
-      <div className="container mx-auto flex h-16 items-center gap-5 px-5 pt-5 md:px-0 md:py-2 md:pt-0">
-        <div className="hidden h-10 w-[280px] items-center justify-between md:flex">
+    <header className="bg-card z-50 shadow">
+      <div className="container mx-auto flex h-16 items-center gap-5 p-5 md:px-0 md:py-2 md:pt-0 md:pb-0">
+        <div className="hidden h-10 w-70 items-center justify-between md:flex">
           <HeaderLogo />
           <HeaderCatalog />
         </div>
 
         <HeaderSearchbar />
-        <HeaderNav />
+        <HeaderNav className="hidden md:flex" />
       </div>
     </header>
   );

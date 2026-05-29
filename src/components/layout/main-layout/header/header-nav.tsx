@@ -5,12 +5,17 @@ import { buttonVariants } from '@/components/ui/button';
 import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { cn } from '@/lib/utils';
 
-export function HeaderNav() {
+export function HeaderNav({ className }: { className?: string }) {
   const location = useLocation();
   const { user } = useGetCurrentUser();
 
   return (
-    <div className="hidden h-10 flex-1 items-center justify-end gap-4 text-xs md:flex">
+    <div
+      className={cn(
+        'flex h-10 flex-1 items-center justify-end gap-4 text-xs',
+        className,
+      )}
+    >
       <Link className="nav-link" to={'/profile'}>
         <User
           className={cn({
@@ -37,7 +42,8 @@ export function HeaderNav() {
           className={buttonVariants({
             // мы переписываем дефолтные стили shadcn, поэтому
             // везде используется !important
-            className: 'h-full px-4! py-2! text-base! font-bold!',
+            className:
+              'h-full flex-1 px-4! py-2! text-base! font-bold! md:w-fit md:flex-none',
           })}
           to={'/register'}
         >

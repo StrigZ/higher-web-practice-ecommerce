@@ -34,7 +34,7 @@ export function CartItem({
       >
         <img
           alt="обложка усов"
-          className="relative z-20 aspect-square h-[80px] object-cover"
+          className="relative aspect-square h-[80px] object-cover"
           src={product.images[0]}
         />
         <p className="text-secondary flex-1 text-base font-normal">

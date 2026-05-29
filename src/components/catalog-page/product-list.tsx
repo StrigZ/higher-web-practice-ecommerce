@@ -38,9 +38,9 @@ export function ProductList({
   }
 
   return (
-    <div className="flex flex-col gap-y-2">
+    <div className="flex flex-col gap-y-2 py-4">
       <ul
-        className={cn('grid rounded-[12px] p-5', {
+        className={cn('grid rounded-[12px] md:p-5', {
           'bg-card grid-cols-2 grid-rows-3 gap-1 md:grid-cols-4 md:gap-5':
             layoutStyle === 'сетка',
           'grid-cols-1 gap-2': layoutStyle === 'список',

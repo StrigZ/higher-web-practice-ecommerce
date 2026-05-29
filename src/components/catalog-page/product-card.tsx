@@ -35,7 +35,7 @@ export function ProductCard(
       >
         <img
           alt="обложка усов"
-          className={cn('relative z-20 object-cover', {
+          className={cn('relative object-cover', {
             'aspect-video h-43 w-full': layoutStyle === 'сетка',
             'aspect-square h-20': layoutStyle === 'список',
           })}

@@ -18,7 +18,7 @@ export function FilterSidebar({
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <Card className={cn('h-full p-0', classNames)}>
+    <Card className={cn('h-full p-0 md:h-fit', classNames)}>
       <CardContent className="flex flex-col gap-5 overflow-y-auto p-5 pt-0 md:p-6">
         <FilterCategories classNames="order-2 md:order-1" />
         <FilterGroups classNames="order-2 md:order-1" />
