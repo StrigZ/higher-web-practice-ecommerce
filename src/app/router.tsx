@@ -1,7 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { StubPage } from '../pages/_StubPage';
-
 import { MainLayout, ProfileLayout } from '@/components/layout';
 import { ProtectedRoute } from '@/components/protected-route';
 import { CartPage } from '@/pages/cart-page';
@@ -11,6 +9,7 @@ import { LoginPage } from '@/pages/login-page';
 import { OrderHistoryPage } from '@/pages/order-history-page';
 import { OrderPage } from '@/pages/order-page';
 import { ProductPage } from '@/pages/product-page';
+import { ProfileEditPage } from '@/pages/profile-edit-page';
 import { ProfilePage } from '@/pages/profile-page';
 import { RegisterPage } from '@/pages/register-page';
 import { ProductPageProvider } from '@/providers/product-page-context/product-page-provider';
@@ -61,10 +60,10 @@ const router = createBrowserRouter([
             index: true,
           },
           {
-            path: 'profile/edit',
+            path: 'edit',
             element: (
               <ProtectedRoute access="auth">
-                <StubPage title="Редактирование профиля" />
+                <ProfileEditPage />
               </ProtectedRoute>
             ),
           },
