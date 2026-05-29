@@ -13,7 +13,7 @@ export function CatalogPage() {
   const [layoutStyle, setLayoutStyle] = useState<'сетка' | 'список'>('сетка');
 
   return (
-    <div className="mx-auto flex max-w-[1180px] flex-col gap-5 py-8">
+    <div className="mx-auto flex max-w-295 flex-col gap-3 p-5 pt-3 md:gap-x-5 md:py-8">
       {searchParams.has('category') && (
         <Breadcrumbs
           values={[
@@ -24,7 +24,7 @@ export function CatalogPage() {
         />
       )}
       <div className="flex gap-5">
-        <FilterSidebar />
+        <FilterSidebar classNames="hidden md:flex md:bg-white" />
         <div className="flex flex-1 flex-col gap-2">
           <header className="flex justify-between">
             <h1 className="text-3xl font-bold uppercase">Усы</h1>

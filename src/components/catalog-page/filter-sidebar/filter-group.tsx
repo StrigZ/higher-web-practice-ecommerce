@@ -5,6 +5,7 @@ import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
+import { cn } from '@/lib/utils';
 import type { ProductFilterGroup } from '@/types/product';
 
 type Props = {
@@ -52,8 +53,14 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
     });
 
   return (
-    <div className="space-y-3">
-      <p className="text-base font-bold">{label}</p>
+    <div className="space-y-3 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none">
+      <p
+        className={cn('text-base font-bold', {
+          'hidden md:inline-flex': type === 'switch',
+        })}
+      >
+        {label}
+      </p>
       {type === 'radio' ? (
         <RadioGroup
           className="gap-y-3"
@@ -61,13 +68,16 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
           onValueChange={updateSearchParams}
         >
           {values.map((value) => (
-            <div key={value} className="flex items-center gap-x-2">
+            <div
+              key={value}
+              className="bg-background has-[data-state='checked']:border-secondary flex items-center gap-x-2 rounded-[4px] px-3 py-1 has-[data-state='checked']:border md:bg-white md:p-0"
+            >
               <RadioGroupItem
                 id={`filter-${filterName}-${value}`}
                 value={value}
               />
               <Label
-                className="text-sm"
+                className="flex-1 text-sm"
                 htmlFor={`filter-${filterName}-${value}`}
               >
                 {value}
@@ -78,7 +88,11 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
       ) : (
         <FieldGroup className="flex flex-col gap-y-3">
           {values.map((value) => (
-            <Field key={value} className="gap-x-2" orientation="horizontal">
+            <Field
+              key={value}
+              className="flex gap-x-2"
+              orientation="horizontal"
+            >
               {type === 'checkbox' ? (
                 <Checkbox
                   checked={
@@ -92,13 +106,14 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
               ) : (
                 <Switch
                   checked={searchParams.has(filterName)}
+                  className="order-2 md:order-1"
                   id={`filter-${filterName}-${value}`}
                   name={`filter-${filterName}-${value}`}
                   onCheckedChange={() => updateSearchParams(value)}
                 />
               )}
               <FieldLabel
-                className="text-sm"
+                className="order-1 text-sm md:order-2"
                 htmlFor={`filter-${filterName}-${value}`}
               >
                 {value}

@@ -1,5 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
+import { FiltersSheet } from './mobile/filters-sheet';
+
 import {
   Select,
   SelectContent,
@@ -26,41 +28,44 @@ export function CatalogControls({ layoutStyle, updateLayoutStyle }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <div className="flex items-center gap-2">
-      <Select
-        value={searchParams.get('sortBy') ?? 'newest'}
-        onValueChange={(value) =>
-          setSearchParams((searchParams) => {
-            searchParams.set('sortBy', value);
-            return searchParams;
-          })
-        }
-      >
-        <SelectTrigger className="bg-card ring-0">
-          <SelectValue placeholder="Сортировка" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {productSortingVariants.map((variant) => (
-              <SelectItem key={variant} value={variant}>
-                {sortingVariantToLabelMap[variant]}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+    <>
+      <div className="hidden items-center gap-2 md:flex">
+        <Select
+          value={searchParams.get('sortBy') ?? 'newest'}
+          onValueChange={(value) =>
+            setSearchParams((searchParams) => {
+              searchParams.set('sortBy', value);
+              return searchParams;
+            })
+          }
+        >
+          <SelectTrigger className="bg-card ring-0">
+            <SelectValue placeholder="Сортировка" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {productSortingVariants.map((variant) => (
+                <SelectItem key={variant} value={variant}>
+                  {sortingVariantToLabelMap[variant]}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
-      <Select value={layoutStyle} onValueChange={updateLayoutStyle}>
-        <SelectTrigger className="bg-card ring-0">
-          <SelectValue placeholder="Отображение" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="сетка">Сеткой</SelectItem>
-            <SelectItem value="список">Списком</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    </div>
+        <Select value={layoutStyle} onValueChange={updateLayoutStyle}>
+          <SelectTrigger className="bg-card ring-0">
+            <SelectValue placeholder="Отображение" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="сетка">Сеткой</SelectItem>
+              <SelectItem value="список">Списком</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <FiltersSheet />
+    </>
   );
 }

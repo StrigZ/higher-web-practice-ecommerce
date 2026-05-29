@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { Field, FieldGroup } from '@/components/ui/field';
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useProducts } from '@/hooks/use-products';
+import { cn } from '@/lib/utils';
 
-export function FilterPrice() {
+export function FilterPrice({ classNames }: { classNames?: string }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { products } = useProducts();
@@ -31,29 +32,40 @@ export function FilterPrice() {
     });
 
   return (
-    <FieldGroup className="flex flex-col gap-y-3">
+    <FieldGroup
+      className={cn(
+        'flex flex-col gap-y-3 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none',
+        classNames,
+      )}
+    >
       <p className="text-base font-bold">Цена</p>
       <Field className="gap-x-2" orientation="horizontal">
-        <Input
-          className="bg-muted border-disabled border"
-          min={minPrice}
-          placeholder={String(minPrice)}
-          type="number"
-          value={searchParams.get('minPrice') ?? ''}
-          onChange={({ target: { value } }) => {
-            updateSearchParams('minPrice', value);
-          }}
-        />
-        <Input
-          className="bg-muted border-disabled border"
-          max={maxPrice}
-          placeholder={String(maxPrice)}
-          type="number"
-          value={searchParams.get('maxPrice') ?? ''}
-          onChange={({ target: { value } }) => {
-            updateSearchParams('maxPrice', value);
-          }}
-        />
+        <div className="flex-1">
+          <FieldLabel className="md:hidden">от</FieldLabel>
+          <Input
+            className="bg-muted border-disabled border"
+            min={minPrice}
+            placeholder={String(minPrice)}
+            type="number"
+            value={searchParams.get('minPrice') ?? ''}
+            onChange={({ target: { value } }) => {
+              updateSearchParams('minPrice', value);
+            }}
+          />
+        </div>
+        <div className="flex-1">
+          <FieldLabel className="md:hidden">до</FieldLabel>
+          <Input
+            className="bg-muted border-disabled border"
+            max={maxPrice}
+            placeholder={String(maxPrice)}
+            type="number"
+            value={searchParams.get('maxPrice') ?? ''}
+            onChange={({ target: { value } }) => {
+              updateSearchParams('maxPrice', value);
+            }}
+          />
+        </div>
       </Field>
     </FieldGroup>
   );

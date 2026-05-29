@@ -5,6 +5,7 @@ import {
   productStyles,
   productThickness,
 } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 import type { ProductFilterGroup } from '@/types/product';
 
 const filterData: {
@@ -39,8 +40,12 @@ const filterData: {
   },
 ];
 
-export function FilterGroups() {
-  return filterData.map((data) => (
-    <FilterGroup {...data} key={data.filterName} />
-  ));
+export function FilterGroups({ classNames }: { classNames?: string }) {
+  return (
+    <div className={cn('flex flex-col gap-5', classNames)}>
+      {filterData.map((data) => (
+        <FilterGroup {...data} key={data.filterName} />
+      ))}
+    </div>
+  );
 }

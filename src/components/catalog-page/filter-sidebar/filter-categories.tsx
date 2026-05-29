@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { productCategories } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
-export function FilterCategories() {
+export function FilterCategories({ classNames }: { classNames?: string }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category');
 
@@ -30,7 +30,12 @@ export function FilterCategories() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      className={cn(
+        'flex flex-col gap-2 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none',
+        classNames,
+      )}
+    >
       {!!selectedCategory && (
         <Button
           className="text-secondary h-6 justify-start gap-0 p-0"
