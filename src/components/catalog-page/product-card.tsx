@@ -21,24 +21,23 @@ export function ProductCard(
   return (
     <Card
       className={cn({
-        'flex flex-row items-center': layoutStyle === 'список',
+        'flex flex-row items-center px-4': layoutStyle === 'список',
         'shadow-none ring-0': layoutStyle === 'сетка',
       })}
     >
       <Link
-        className={cn('relative mx-auto w-full', {
+        className={cn('relative mx-auto w-full p-0', {
           'max-w-sm gap-y-2 rounded-none border-none p-0 shadow-none':
             layoutStyle === 'сетка',
-          'flex flex-row gap-x-2 rounded-[12px] p-4 pt-4!':
-            layoutStyle === 'список',
+          'flex flex-row gap-x-2 rounded-[12px]': layoutStyle === 'список',
         })}
         to={`/product/${id}`}
       >
         <img
           alt="обложка усов"
           className={cn('relative z-20 object-cover', {
-            'aspect-video h-[172px] w-full': layoutStyle === 'сетка',
-            'aspect-square h-[80px]': layoutStyle === 'список',
+            'aspect-video h-43 w-full': layoutStyle === 'сетка',
+            'aspect-square h-20': layoutStyle === 'список',
           })}
           src={images[0]}
         />
