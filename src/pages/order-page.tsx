@@ -93,9 +93,7 @@ export function OrderPage() {
         </CardContent>
       </Card>
       <div className="flex justify-between">
-        <Button className="h-10 px-4 py-2" onClick={() => window.print()}>
-          Распечатать
-        </Button>
+        <Button onClick={() => window.print()}>Распечатать</Button>
         <Link className="text-secondary" to={'/profile/orders'}>
           Все заказы
         </Link>

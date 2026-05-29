@@ -46,7 +46,7 @@ export function CartItem({
       <p className="font-heading text-2xl font-bold">{product.price} ₽</p>
 
       <Button
-        className="text-primary h-10 w-10"
+        className="text-primary w-10"
         size={'icon'}
         variant={'ghost'}
         onClick={handleRemoveItem}

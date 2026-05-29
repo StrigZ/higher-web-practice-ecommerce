@@ -73,7 +73,7 @@ export function ProductCard(
 
       <CardFooter className="p-0">
         <ShoppingCartButton
-          className={cn('h-10 p-2', {
+          className={cn('p-2', {
             'w-full': layoutStyle === 'сетка',
             'w-25': layoutStyle === 'список',
           })}

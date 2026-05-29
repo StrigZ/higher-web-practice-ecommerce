@@ -142,7 +142,7 @@ export function RegisterPage() {
         <CardFooter className="flex flex-col items-start gap-10">
           <Field orientation="vertical">
             <Button
-              className="h-10 w-full text-base font-bold"
+              className="w-full text-base font-bold"
               form="form"
               type="submit"
             >

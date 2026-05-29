@@ -81,7 +81,7 @@ export function ShoppingCartButton({
   return cartItem ? (
     <div className={cn('flex items-center justify-center gap-2', className)}>
       <Button
-        className="h-10 w-10 rounded-sm text-sm"
+        className="w-10 rounded-sm text-sm"
         disabled={isMutationLoading}
         variant={'ghost'}
         onClick={handleDecrementItem}
@@ -92,7 +92,7 @@ export function ShoppingCartButton({
         {cartItem.quantity}
       </span>
       <Button
-        className="h-10 w-10 rounded-sm text-sm"
+        className="w-10 rounded-sm text-sm"
         disabled={isMutationLoading}
         variant={'ghost'}
         onClick={handleAddItem}
@@ -102,7 +102,7 @@ export function ShoppingCartButton({
     </div>
   ) : (
     <Button
-      className={cn('h-10 p-2', className)}
+      className={cn('p-2', className)}
       disabled={isMutationLoading}
       onClick={handleAddItem}
     >

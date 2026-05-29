@@ -52,15 +52,12 @@ export function FilterCategories() {
           (category) => (
             <li key={`filter-category-${category}`}>
               <Button
-                className={cn(
-                  'text-foreground h-10 w-full justify-start px-4 py-2',
-                  {
-                    'bg-muted text-secondary': searchParams.has(
-                      'subcategory',
-                      category,
-                    ),
-                  },
-                )}
+                className={cn('text-foreground w-full justify-start', {
+                  'bg-muted text-secondary': searchParams.has(
+                    'subcategory',
+                    category,
+                  ),
+                })}
                 variant={'link'}
                 onClick={() =>
                   setSearchParams((searchParams) => {
