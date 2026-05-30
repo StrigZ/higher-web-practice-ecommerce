@@ -34,6 +34,8 @@ export function CatalogControls({ layoutStyle, updateLayoutStyle }: Props) {
           value={searchParams.get('sortBy') ?? 'newest'}
           onValueChange={(value) =>
             setSearchParams((searchParams) => {
+              searchParams.delete('page');
+
               searchParams.set('sortBy', value);
               return searchParams;
             })

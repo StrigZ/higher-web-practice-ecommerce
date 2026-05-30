@@ -41,6 +41,8 @@ export function FilterCategories({ className }: { className?: string }) {
           variant={'link'}
           onClick={() =>
             setSearchParams((searchParams) => {
+              searchParams.delete('page');
+
               searchParams.delete('category');
               searchParams.delete('subcategory');
               return searchParams;
@@ -65,6 +67,8 @@ export function FilterCategories({ className }: { className?: string }) {
                 variant={'link'}
                 onClick={() =>
                   setSearchParams((searchParams) => {
+                    searchParams.delete('page');
+
                     if (!selectedCategory) {
                       searchParams.delete('subcategory');
                     }

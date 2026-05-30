@@ -20,6 +20,8 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
 
   const updateSearchParams = (value: string) =>
     setSearchParams((searchParams) => {
+      searchParams.delete('page');
+
       switch (type) {
         case 'checkbox': {
           const current =

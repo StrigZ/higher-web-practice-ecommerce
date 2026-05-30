@@ -26,6 +26,7 @@ export function FiltersSheet() {
   const handleSheetClose = () => {
     setIsOpen(false);
     setTimeout(() => {
+      searchParams.delete('page');
       setSearchParams(new URLSearchParams(initialParams));
     }, 300);
   };

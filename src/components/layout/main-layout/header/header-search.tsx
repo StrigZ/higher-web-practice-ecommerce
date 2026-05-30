@@ -27,6 +27,8 @@ export function HeaderSearchbar({ className }: { className?: string }) {
     const { query } = data;
 
     setSearchParams((searchParams) => {
+      searchParams.delete('page');
+
       if (query) {
         searchParams.set('search', query);
       } else {

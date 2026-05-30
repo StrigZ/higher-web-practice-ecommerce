@@ -22,6 +22,8 @@ export function FilterPrice({ classNames }: { classNames?: string }) {
 
   const updateSearchParams = (type: 'minPrice' | 'maxPrice', value: string) =>
     setSearchParams((searchParams) => {
+      searchParams.delete('page');
+
       if (value) {
         searchParams.set(type, value);
       } else {
