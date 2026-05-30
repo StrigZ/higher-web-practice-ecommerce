@@ -24,7 +24,6 @@ export function FilterCategories({ className }: { className?: string }) {
   );
 
   if (isLoading) {
-    // TODO: add skeleton
     return <div>loading</div>;
   }
 

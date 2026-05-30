@@ -15,7 +15,6 @@ export function ProductPageProvider({ children }: { children: ReactNode }) {
   const { data: ratings, isLoading: isRatingsLoading } =
     useGetProductRatingsQuery({ productId: id! }, { skip: !id });
 
-  // TODO: replace with skeleton or spinner
   if (isProductLoading || isRatingsLoading || !product || !ratings) {
     return <p>Loading...</p>;
   }

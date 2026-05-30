@@ -8,7 +8,6 @@ export function CartPage() {
     useGetCurrentUserCart();
 
   if (isLoading) {
-    // TODO:add spinner
     return <p>loading</p>;
   }
 
