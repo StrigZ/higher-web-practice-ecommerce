@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { Star } from 'lucide-react';
 
 import { Separator } from '@/components/ui/separator';
@@ -9,10 +11,10 @@ export function ProductRatingList() {
   return (
     <ul className="flex flex-col gap-5">
       {ratings.length > 0 ? (
-        ratings.map(({ rating, userName }) => (
+        ratings.map(({ rating, userName, createdAt }) => (
           <li key={userName} className="flex flex-col gap-5">
             <Separator />
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <div className="flex items-center gap-2">
                 <ul className="flex items-center">
                   {Array(rating)
@@ -28,7 +30,14 @@ export function ProductRatingList() {
                 </ul>
                 <p className="text-base font-bold">{rating}.0</p>
               </div>
-              <p className="text-base">{userName}</p>
+              <div className="flex flex-1 items-center justify-between">
+                <p className="text-base">{userName}</p>
+                <p className="text-muted-foreground text-xs">
+                  {format(createdAt, "d MMMM yyyy 'г.'", {
+                    locale: ru,
+                  })}
+                </p>
+              </div>
             </div>
           </li>
         ))

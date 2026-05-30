@@ -53,10 +53,10 @@ export function RateButton() {
 
   return (
     isBoughtByUser && (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col items-center gap-2 sm:items-start">
         <p className="text-base">Оценить усы</p>
         <ul
-          className="flex"
+          className="flex w-full justify-center gap-6 sm:justify-start sm:gap-0"
           onMouseLeave={() => setHoveredRating(userRating?.rating ?? null)}
         >
           {Array(5)
@@ -73,7 +73,7 @@ export function RateButton() {
                 onMouseEnter={() => setHoveredRating(i + 1)}
               >
                 <Star
-                  className={cn('stroke-primary size-6', {
+                  className={cn('stroke-primary size-8 sm:size-6', {
                     'fill-primary': hoveredRating && i < hoveredRating,
                   })}
                 />

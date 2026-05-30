@@ -3,16 +3,17 @@ import { ShoppingCartButton } from '../../cart-button';
 import { ProductHeader } from './product-header';
 
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 import { useProductPageContext } from '@/providers/product-page-context/use-product-page-context';
 
-export function ProductInfo() {
+export function ProductInfo({ className }: { className?: string }) {
   const { product } = useProductPageContext();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={cn('flex flex-col gap-4', className)}>
       <ProductHeader />
 
-      <div className="flex items-end justify-between">
+      <div className="hidden items-end justify-between sm:flex">
         <ShoppingCartButton className="w-45" product={product} />
         <span className="text-muted-foreground text-base">
           {product.inStock ? 'Есть' : 'Нет'} в наличии

@@ -25,13 +25,30 @@ export function ProductImageCarousel() {
     });
 
   return (
-    <div className="grid grid-rows-[6fr_1fr] items-center justify-center">
-      <img
-        alt=""
-        className="aspect-square h-full w-full"
-        src={product.images[displayImageIndex ?? 0]}
-      />
-      <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+    <div className="flex grid-rows-[6fr_1fr] flex-col items-center justify-center sm:grid">
+      <div className="flex items-center justify-center">
+        <Button
+          className="sm:hidden"
+          variant={'ghost'}
+          onClick={handlePreviousImageClick}
+        >
+          <ChevronLeft />
+        </Button>
+        <img
+          alt=""
+          className="aspect-square h-[288px] flex-1 sm:h-full"
+          src={product.images[displayImageIndex ?? 0]}
+        />
+        <Button
+          className="sm:hidden"
+          variant={'ghost'}
+          onClick={handleNextImageClick}
+        >
+          <ChevronRight />
+        </Button>
+      </div>
+
+      <div className="hidden grid-cols-[auto_1fr_auto] items-center gap-2 sm:grid">
         <Button variant={'ghost'} onClick={handlePreviousImageClick}>
           <ChevronLeft />
         </Button>

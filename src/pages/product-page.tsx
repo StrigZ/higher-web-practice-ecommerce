@@ -1,4 +1,6 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
+import { ShoppingCartButton } from '@/components/cart-button';
+import { MobileMenu } from '@/components/layout/main-layout/mobile-menu/mobile-menu';
 import { ProductImageCarousel } from '@/components/product-page/product-card/product-image-carousel';
 import { ProductInfo } from '@/components/product-page/product-card/product-info';
 import { ProductRatingCard } from '@/components/product-page/product-rating-card/product-rating-card';
@@ -9,19 +11,31 @@ export function ProductPage() {
   const { product } = useProductPageContext();
 
   return (
-    <div className="mx-auto grid max-w-245 grid-rows-[auto_1fr_auto] gap-5 py-8">
-      <Breadcrumbs
-        values={[
-          'УСЫ',
-          product.characteristics['категория'],
-          product.characteristics['подкатегория'],
-        ]}
-      />
-      <Card className="grid grid-cols-2 gap-5 p-6">
-        <ProductImageCarousel />
-        <ProductInfo />
-      </Card>
-      <ProductRatingCard />
+    <div className="flex h-full flex-col">
+      <div className="overflow-y-scroll sm:py-8">
+        <div className="flex flex-col gap-5">
+          <Breadcrumbs
+            className="hidden sm:block"
+            values={[
+              'УСЫ',
+              product.characteristics['категория'],
+              product.characteristics['подкатегория'],
+            ]}
+          />
+
+          <Card className="bg-background sm:bg-card flex flex-col p-0 shadow-none sm:grid sm:grid-cols-2 sm:gap-5 sm:p-6 sm:shadow-xs">
+            <ProductImageCarousel />
+            <ProductInfo className="px-5" />
+          </Card>
+          <div className="px-5 sm:px-0">
+            <ProductRatingCard />
+          </div>
+          <div className="sticky bottom-0 grid border-t bg-white px-5 py-4 sm:hidden">
+            <ShoppingCartButton product={product} />
+          </div>
+        </div>
+      </div>
+      <MobileMenu />
     </div>
   );
 }
