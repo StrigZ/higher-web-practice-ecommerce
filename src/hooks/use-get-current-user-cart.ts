@@ -12,7 +12,11 @@ export function useGetCurrentUserCart() {
   );
 
   const totalPrice = useMemo(
-    () => (cartItems ?? []).reduce((prev, curr) => prev + curr.price, 0),
+    () =>
+      (cartItems ?? []).reduce(
+        (prev, curr) => prev + curr.price * curr.quantity,
+        0,
+      ),
     [cartItems],
   );
 
