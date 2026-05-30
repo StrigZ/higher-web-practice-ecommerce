@@ -35,16 +35,16 @@ export function OrderHistoryItem(order: Order) {
   return (
     <Card className="p-0">
       <CardContent className="flex flex-col gap-4 p-4">
-        <Link className="flex" to={`/order/${order.id}`}>
+        <Link className="flex flex-col sm:flex-row" to={`/order/${order.id}`}>
           <div className="flex flex-1 flex-col gap-2">
-            <p className="font-heading text-xl font-bold">
+            <p className="font-heading text-base font-bold sm:text-xl">
               от{' '}
               {format(order.createdAt, "d MMMM yyyy 'г.'", {
                 locale: ru,
               })}
             </p>
             <p
-              className={cn('text-base font-bold', {
+              className={cn('font-bold sm:text-base', {
                 'text-destructive': order.status === 'cancelled',
                 'text-success': order.status === 'delivered',
               })}
@@ -59,11 +59,11 @@ export function OrderHistoryItem(order: Order) {
               )}
             </p>
           </div>
-          <div className="text-right">
-            <p className="font-heading text-2xl font-bold">
+          <div className="flex flex-row items-center justify-between text-right sm:flex-col">
+            <p className="font-heading order-2 text-2xl font-bold sm:order-1">
               {order.totalPrice} ₽
             </p>
-            <p className="text-muted-foreground text-xs">
+            <p className="text-muted-foreground order-1 text-xs sm:order-2">
               {paymentMethodToTextMap[order.paymentMethod]}
             </p>
           </div>
