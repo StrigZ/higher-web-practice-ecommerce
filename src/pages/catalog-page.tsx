@@ -15,7 +15,7 @@ export function CatalogPage() {
   const [layoutStyle, setLayoutStyle] = useState<'сетка' | 'список'>('сетка');
 
   return (
-    <div className="mx-auto flex h-full flex-col sm:max-w-295 sm:gap-5">
+    <div className="mx-auto flex h-full flex-col sm:gap-5">
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-5">
         <HeaderSearchbar className="sm:hidden" />
         {searchParams.has('category') && (
