@@ -1,4 +1,5 @@
 import { useUpdateUserMutation } from '@/api/users-api';
+import { MobileMenu } from '@/components/layout/main-layout/mobile-menu/mobile-menu';
 import { LanguagePicker } from '@/components/profile-page/language-picker';
 import { NotificationSettings } from '@/components/profile-page/notification-settings';
 import { UserCard } from '@/components/profile-page/user-card';
@@ -23,14 +24,18 @@ export function ProfilePage() {
     });
 
   return (
-    <div className="flex flex-1 flex-col gap-4">
-      <UserCard {...user} />
-      <LanguagePicker lang={user.language} onChange={handleChangeLanguage} />
+    <div className="flex h-full flex-1 flex-col">
+      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-0">
+        <h1 className="text-2xl font-bold sm:hidden">Мой профиль</h1>
+        <UserCard {...user} />
+        <LanguagePicker lang={user.language} onChange={handleChangeLanguage} />
 
-      <NotificationSettings
-        checked={user.notifyByEmail ?? false}
-        onChange={handleChangeNotificationSettings}
-      />
+        <NotificationSettings
+          checked={user.notifyByEmail ?? false}
+          onChange={handleChangeNotificationSettings}
+        />
+      </div>
+      <MobileMenu />
     </div>
   );
 }

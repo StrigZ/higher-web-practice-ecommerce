@@ -15,35 +15,34 @@ export function CatalogPage() {
   const [layoutStyle, setLayoutStyle] = useState<'сетка' | 'список'>('сетка');
 
   return (
-    <div className="mx-auto flex h-full flex-col gap-3 overflow-y-auto sm:max-w-295 sm:gap-5">
-      <div className="px-5 pt-5 sm:hidden">
-        <HeaderSearchbar />
-      </div>
-      {searchParams.has('category') && (
-        <Breadcrumbs
-          values={[
-            'УСЫ',
-            searchParams.get('category'),
-            searchParams.get('subcategory'),
-          ]}
-        />
-      )}
+    <div className="mx-auto flex h-full flex-col sm:max-w-295 sm:gap-5">
+      <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-5">
+        <HeaderSearchbar className="sm:hidden" />
+        {searchParams.has('category') && (
+          <Breadcrumbs
+            values={[
+              'УСЫ',
+              searchParams.get('category'),
+              searchParams.get('subcategory'),
+            ]}
+          />
+        )}
 
-      <div className="flex flex-1 gap-5 overflow-y-auto px-5 sm:py-8">
-        <FilterSidebar classNames="hidden sm:flex sm:bg-white" />
-        <div className="flex flex-1 flex-col gap-2">
-          <header className="flex justify-between">
-            <h1 className="text-3xl font-bold uppercase">Усы</h1>
-            <CatalogControls
-              layoutStyle={layoutStyle}
-              updateLayoutStyle={(style) => setLayoutStyle(style)}
-            />
-          </header>
-          <ActiveFiltersList />
-          <ProductList layoutStyle={layoutStyle} />
+        <div className="flex flex-1 gap-5 sm:py-8">
+          <FilterSidebar classNames="hidden sm:flex sm:bg-white" />
+          <div className="flex flex-1 flex-col gap-2">
+            <header className="flex justify-between">
+              <h1 className="text-3xl font-bold uppercase">Усы</h1>
+              <CatalogControls
+                layoutStyle={layoutStyle}
+                updateLayoutStyle={(style) => setLayoutStyle(style)}
+              />
+            </header>
+            <ActiveFiltersList />
+            <ProductList layoutStyle={layoutStyle} />
+          </div>
         </div>
       </div>
-
       <MobileMenu />
     </div>
   );

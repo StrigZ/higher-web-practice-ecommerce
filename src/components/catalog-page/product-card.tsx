@@ -20,7 +20,7 @@ export function ProductCard(
 
   return (
     <Card
-      className={cn({
+      className={cn('sm:bg-card bg-background rounded-xs p-0', {
         'flex flex-row items-center px-4': layoutStyle === 'список',
         'shadow-none ring-0': layoutStyle === 'сетка',
       })}

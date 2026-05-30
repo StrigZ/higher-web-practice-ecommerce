@@ -74,6 +74,7 @@ export function LoginPage() {
                       autoComplete="off"
                       id="form-password"
                       placeholder="********"
+                      type="password"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />

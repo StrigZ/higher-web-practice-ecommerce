@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
@@ -22,15 +23,25 @@ export function RegisterPage() {
   const { onSubmit, form } = useRegisterForm();
 
   return (
-    <div className="flex h-full items-center justify-center">
+    <div className="flex h-full justify-center sm:items-center">
       <Card className="w-full sm:max-w-md">
         <CardHeader>
-          <CardTitle>
+          <Link
+            className="flex items-center gap-2 text-2xl font-bold hover:underline sm:hidden"
+            to={'/'}
+          >
+            <ArrowLeft /> Регистрация
+          </Link>
+          <CardTitle className="hidden sm:block">
             <h2 className="text-2xl font-bold">Регистрация</h2>
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <form id="form" onSubmit={form.handleSubmit(onSubmit)}>
+        <CardContent className="flex flex-1 items-end justify-stretch sm:block sm:flex-0">
+          <form
+            className="w-full"
+            id="form"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             <FieldGroup>
               <Controller
                 control={form.control}
@@ -139,7 +150,7 @@ export function RegisterPage() {
             </FieldGroup>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col items-start gap-10">
+        <CardFooter className="flex flex-1 flex-col items-start gap-10 sm:flex-0">
           <Field orientation="vertical">
             <Button
               className="w-full text-base font-bold"
@@ -152,7 +163,7 @@ export function RegisterPage() {
               <FieldError errors={[form.formState.errors.root]} />
             )}
           </Field>
-          <div className="text-start">
+          <div className="mt-auto text-start">
             <p className="text-muted-foreground">Уже зарегистрированы?</p>
             <Link className="text-secondary font-bold" to={'/login'}>
               Войти в аккаунт

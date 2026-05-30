@@ -116,7 +116,7 @@
   }
   body,
   div#root {
-    @apply sm:bg-background text-foreground h-screen;
+    @apply bg-background text-foreground h-screen;
   }
   html {
     @apply font-sans;

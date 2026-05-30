@@ -8,7 +8,7 @@ import type { User } from '@/types';
 export function UserCard(user: User) {
   return (
     <Card className="p-0">
-      <CardContent className="flex items-center justify-between p-4">
+      <CardContent className="flex flex-col justify-between gap-6 p-4 sm:flex-row sm:items-center">
         <div className="flex items-center gap-4">
           <div className="border-secondary flex aspect-square h-20 items-center justify-center rounded-full border">
             <PersonStanding size={48} />

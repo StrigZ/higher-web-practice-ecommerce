@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 export function MobileNav({ className }: { className?: string }) {
   return (
-    <nav className={cn(className)}>
+    <nav className={cn('bg-white', className)}>
       <ul className="flex items-center justify-between">
         <Link
           className="flex flex-1 flex-col items-center justify-center gap-1 text-xs"

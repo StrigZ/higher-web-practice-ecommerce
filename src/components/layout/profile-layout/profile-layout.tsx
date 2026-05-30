@@ -17,8 +17,8 @@ export function ProfileLayout() {
   const location = useLocation();
 
   return (
-    <div className="flex h-full items-start gap-5 py-10">
-      <aside>
+    <div className="flex h-full items-start sm:gap-5 sm:py-10">
+      <aside className="hidden sm:block">
         <nav>
           <ul className="flex flex-col gap-2 pr-4">
             {profileRoutes.map(({ url, label, match }) => (

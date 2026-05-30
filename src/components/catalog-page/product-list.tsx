@@ -17,8 +17,10 @@ import { cn } from '@/lib/utils';
 const PAGE_SIZE = 12;
 export function ProductList({
   layoutStyle,
+  className,
 }: {
   layoutStyle: 'сетка' | 'список';
+  className?: string;
 }) {
   const { isLoading, products } = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,10 +40,10 @@ export function ProductList({
   }
 
   return (
-    <div className="flex flex-col gap-y-2 py-4">
+    <div className={cn('flex flex-col gap-y-2 py-4', className)}>
       <ul
         className={cn('grid rounded-[12px] sm:p-5', {
-          'bg-card grid-flow-row grid-cols-2 gap-1 sm:grid-cols-4 sm:gap-5':
+          'sm:bg-card grid-flow-row grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-5':
             layoutStyle === 'сетка',
           'grid-cols-1 gap-2': layoutStyle === 'список',
         })}
@@ -53,9 +55,9 @@ export function ProductList({
             </li>
           ))
         ) : (
-          <p className="col-span-full row-span-full self-center justify-self-center">
+          <div className="col-span-full row-span-full self-center justify-self-center p-4">
             Ничего не найдено
-          </p>
+          </div>
         )}
       </ul>
       {totalPages > 1 && (
