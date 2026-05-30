@@ -13,18 +13,21 @@ import {
 
 import { cities } from '@/lib/constants';
 import type { CheckoutFormValues } from '@/lib/form-schemas/order-form-schema';
+import { cn } from '@/lib/utils';
 
 export function AddressInput({
   control,
+  className,
 }: {
   control: Control<CheckoutFormValues>;
+  className?: string;
 }) {
   return (
-    <FieldGroup className="gap-2">
+    <FieldGroup className={cn('gap-2', className)}>
       <FieldLabel className="text-foreground text-base">
         Доставить по адресу:
       </FieldLabel>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col items-center gap-2 sm:flex-row">
         <Controller
           control={control}
           name="city"

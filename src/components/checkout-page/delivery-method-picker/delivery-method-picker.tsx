@@ -67,12 +67,14 @@ export function DeliveryMethodPicker({
             </Field>
           )}
         />
-        {active === 'courier' ? (
-          <AddressInput control={control} />
-        ) : (
-          <PickupPointPicker control={control} />
-        )}
-        <p className="text-muted-foreground flex items-center gap-2">
+        <div className="order-2 sm:order-1">
+          {active === 'courier' ? (
+            <AddressInput control={control} />
+          ) : (
+            <PickupPointPicker control={control} />
+          )}
+        </div>
+        <p className="text-muted-foreground order-1 flex items-center gap-2 sm:order-2">
           Доставят
           <span className="text-foreground text-base">{formattedDate}</span>
         </p>

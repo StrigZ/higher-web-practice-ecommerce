@@ -8,6 +8,7 @@ import { CustomerInfo } from '@/components/checkout-page/customer-info';
 import { DeliveryMethodPicker } from '@/components/checkout-page/delivery-method-picker/delivery-method-picker';
 import { OrderSummary } from '@/components/checkout-page/order-summary';
 import { PaymentMethodPicker } from '@/components/checkout-page/payment-method-picker';
+import { MobileMenu } from '@/components/layout/main-layout/mobile-menu/mobile-menu';
 import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
 import { cities, pickupPoints } from '@/lib/constants';
@@ -73,16 +74,28 @@ export function CheckoutPage() {
     }
   }
   return (
-    <form
-      className="flex items-start gap-5 py-10"
-      onSubmit={form.handleSubmit(onSubmit)}
-    >
-      <div className="flex w-145 flex-col gap-6">
-        <PaymentMethodPicker active={paymentMethod} control={form.control} />
-        <DeliveryMethodPicker active={deliveryMethod} control={form.control} />
-        <CustomerInfo control={form.control} />
-      </div>
-      <OrderSummary />
-    </form>
+    <div className="flex h-full flex-col">
+      <form
+        className="flex h-full flex-1 flex-col overflow-y-auto"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:py-10">
+          <div className="flex h-full flex-1 flex-col gap-6 p-5 sm:p-0">
+            <PaymentMethodPicker
+              active={paymentMethod}
+              control={form.control}
+            />
+            <DeliveryMethodPicker
+              active={deliveryMethod}
+              control={form.control}
+            />
+            <CustomerInfo control={form.control} />
+          </div>
+          <OrderSummary className="sticky bottom-0 w-full" />
+        </div>
+      </form>
+
+      <MobileMenu />
+    </div>
   );
 }
