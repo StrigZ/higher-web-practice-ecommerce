@@ -1,6 +1,5 @@
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 
-import { searchFiltersSlice } from './features/search-filter/search-filter-slice';
 import { userSlice } from './features/user/user-slice';
 
 import { cartApi } from '@/api/cart-api';
@@ -11,7 +10,6 @@ import { usersApi } from '@/api/users-api';
 
 export const rootReducer = combineSlices(
   userSlice,
-  searchFiltersSlice,
   productsApi,
   cartApi,
   ordersApi,
