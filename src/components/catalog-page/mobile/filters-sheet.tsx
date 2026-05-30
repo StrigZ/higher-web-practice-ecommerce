@@ -33,7 +33,7 @@ export function FiltersSheet() {
   return (
     <Sheet open={isOpen} onOpenChange={handleOpen}>
       <SheetTrigger asChild>
-        <Button className="md:hidden" variant={'ghost'}>
+        <Button className="sm:hidden" variant={'ghost'}>
           <SlidersHorizontal className="size-5" />
         </Button>
       </SheetTrigger>

@@ -44,17 +44,17 @@ export function HeaderSearchbar({ className }: { className?: string }) {
       )}
       onSubmit={form.handleSubmit(onSubmit)}
     >
-      <Search className="text-muted-foreground absolute left-2 size-4 md:hidden" />
+      <Search className="text-muted-foreground absolute left-2 size-4 sm:hidden" />
       <Input
         {...form.register('query')}
         aria-invalid={!!form.formState.errors.query}
         autoComplete="off"
-        className="border-primary h-full rounded-md border-2 pl-8 transition-colors placeholder:text-sm focus-visible:ring-0 md:rounded-r-none md:pl-2 md:placeholder:text-base"
+        className="border-primary h-full rounded-md border-2 pl-8 transition-colors placeholder:text-sm focus-visible:ring-0 sm:rounded-r-none sm:pl-2 sm:placeholder:text-base"
         placeholder="Искать"
       />
 
       <Button
-        className="group-focus-within:bg-secondary hidden h-full shrink-0 rounded-l-none border-none px-6 transition-colors md:flex"
+        className="group-focus-within:bg-secondary hidden h-full shrink-0 rounded-l-none border-none px-6 transition-colors sm:flex"
         type="submit"
       >
         <Search className="size-6" />

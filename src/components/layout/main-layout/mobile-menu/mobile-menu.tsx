@@ -11,7 +11,7 @@ export function MobileMenu({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'sticky bottom-0 z-50 h-14 border-t bg-white px-5 py-2 shadow md:hidden',
+        'sticky bottom-0 z-50 h-14 border-t bg-white px-5 py-2 shadow sm:hidden',
         className,
       )}
     >

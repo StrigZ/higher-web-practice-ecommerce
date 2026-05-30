@@ -15,8 +15,8 @@ export function CatalogPage() {
   const [layoutStyle, setLayoutStyle] = useState<'сетка' | 'список'>('сетка');
 
   return (
-    <div className="mx-auto flex h-full flex-col gap-3 overflow-y-auto md:max-w-295 md:gap-5">
-      <div className="px-5 pt-5 md:hidden">
+    <div className="mx-auto flex h-full flex-col gap-3 overflow-y-auto sm:max-w-295 sm:gap-5">
+      <div className="px-5 pt-5 sm:hidden">
         <HeaderSearchbar />
       </div>
       {searchParams.has('category') && (
@@ -29,8 +29,8 @@ export function CatalogPage() {
         />
       )}
 
-      <div className="flex flex-1 gap-5 overflow-y-auto px-5 md:py-8">
-        <FilterSidebar classNames="hidden md:flex md:bg-white" />
+      <div className="flex flex-1 gap-5 overflow-y-auto px-5 sm:py-8">
+        <FilterSidebar classNames="hidden sm:flex sm:bg-white" />
         <div className="flex flex-1 flex-col gap-2">
           <header className="flex justify-between">
             <h1 className="text-3xl font-bold uppercase">Усы</h1>

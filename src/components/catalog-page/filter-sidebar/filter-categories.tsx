@@ -31,7 +31,7 @@ export function FilterCategories({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'flex flex-col gap-2 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none',
+        'flex flex-col gap-2 rounded-[12px] p-4 shadow-lg sm:rounded-none sm:p-0 sm:shadow-none',
         className,
       )}
     >

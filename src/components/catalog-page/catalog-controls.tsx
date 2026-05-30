@@ -29,7 +29,7 @@ export function CatalogControls({ layoutStyle, updateLayoutStyle }: Props) {
 
   return (
     <>
-      <div className="hidden items-center gap-2 md:flex">
+      <div className="hidden items-center gap-2 sm:flex">
         <Select
           value={searchParams.get('sortBy') ?? 'newest'}
           onValueChange={(value) =>

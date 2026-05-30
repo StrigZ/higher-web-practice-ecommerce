@@ -16,7 +16,7 @@ export function HeaderNav({ className }: { className?: string }) {
         className,
       )}
     >
-      <Link className="nav-link" to={'/profile'}>
+      <Link className="nav-link" to={user ? '/profile' : '/login'}>
         <User
           className={cn({
             'fill-secondary text-secondary stroke-none':
@@ -40,10 +40,8 @@ export function HeaderNav({ className }: { className?: string }) {
       ) : (
         <Link
           className={buttonVariants({
-            // мы переписываем дефолтные стили shadcn, поэтому
-            // везде используется !important
             className:
-              'h-full flex-1 px-4! py-2! text-base! font-bold! md:w-fit md:flex-none',
+              'h-full flex-1 px-4! py-2! text-base! font-bold! sm:w-fit sm:flex-none',
           })}
           to={'/register'}
         >

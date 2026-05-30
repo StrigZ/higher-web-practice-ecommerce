@@ -53,10 +53,10 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
     });
 
   return (
-    <div className="space-y-3 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none">
+    <div className="space-y-3 rounded-[12px] p-4 shadow-lg sm:rounded-none sm:p-0 sm:shadow-none">
       <p
         className={cn('text-base font-bold', {
-          'hidden md:inline-flex': type === 'switch',
+          'hidden sm:inline-flex': type === 'switch',
         })}
       >
         {label}
@@ -70,7 +70,7 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
           {values.map((value) => (
             <div
               key={value}
-              className="bg-background has-[data-state='checked']:border-secondary flex items-center gap-x-2 rounded-[4px] px-3 py-1 has-[data-state='checked']:border md:bg-white md:p-0"
+              className="bg-background has-[data-state='checked']:border-secondary flex items-center gap-x-2 rounded-[4px] px-3 py-1 has-[data-state='checked']:border sm:bg-white sm:p-0"
             >
               <RadioGroupItem
                 id={`filter-${filterName}-${value}`}
@@ -106,14 +106,14 @@ export function FilterGroup({ values, type, filterName, label }: Props) {
               ) : (
                 <Switch
                   checked={searchParams.has(filterName)}
-                  className="order-2 md:order-1"
+                  className="order-2 sm:order-1"
                   id={`filter-${filterName}-${value}`}
                   name={`filter-${filterName}-${value}`}
                   onCheckedChange={() => updateSearchParams(value)}
                 />
               )}
               <FieldLabel
-                className="order-1 text-sm md:order-2"
+                className="order-1 text-sm sm:order-2"
                 htmlFor={`filter-${filterName}-${value}`}
               >
                 {value}

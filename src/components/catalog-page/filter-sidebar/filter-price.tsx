@@ -34,14 +34,14 @@ export function FilterPrice({ classNames }: { classNames?: string }) {
   return (
     <FieldGroup
       className={cn(
-        'flex flex-col gap-y-3 rounded-[12px] p-4 shadow-lg md:rounded-none md:p-0 md:shadow-none',
+        'flex flex-col gap-y-3 rounded-[12px] p-4 shadow-lg sm:rounded-none sm:p-0 sm:shadow-none',
         classNames,
       )}
     >
       <p className="text-base font-bold">Цена</p>
       <Field className="gap-x-2" orientation="horizontal">
         <div className="flex-1">
-          <FieldLabel className="md:hidden">от</FieldLabel>
+          <FieldLabel className="sm:hidden">от</FieldLabel>
           <Input
             className="bg-muted border-disabled border"
             min={minPrice}
@@ -54,7 +54,7 @@ export function FilterPrice({ classNames }: { classNames?: string }) {
           />
         </div>
         <div className="flex-1">
-          <FieldLabel className="md:hidden">до</FieldLabel>
+          <FieldLabel className="sm:hidden">до</FieldLabel>
           <Input
             className="bg-muted border-disabled border"
             max={maxPrice}

@@ -18,14 +18,14 @@ export function FilterSidebar({
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <Card className={cn('h-full p-0 md:h-fit', classNames)}>
-      <CardContent className="flex flex-col gap-5 overflow-y-auto p-5 pt-0 md:p-6">
-        <FilterCategories className="order-2 md:order-1" />
-        <FilterGroups classNames="order-2 md:order-1" />
-        <FilterPrice classNames="order-1 md:order-2" />
+    <Card className={cn('h-full p-0 sm:h-fit', classNames)}>
+      <CardContent className="flex flex-col gap-5 overflow-y-auto p-5 pt-0 sm:p-6">
+        <FilterCategories className="order-2 sm:order-1" />
+        <FilterGroups classNames="order-2 sm:order-1" />
+        <FilterPrice classNames="order-1 sm:order-2" />
 
         <Button
-          className="order-3 hidden md:flex"
+          className="order-3 hidden sm:flex"
           disabled={searchParams.size === 0}
           size={'lg'}
           variant={'outline'}
@@ -35,7 +35,7 @@ export function FilterSidebar({
         </Button>
         {onClose && (
           <Button
-            className="sticky bottom-0 order-3 w-full shadow-lg md:hidden"
+            className="sticky bottom-0 order-3 w-full shadow-lg sm:hidden"
             onClick={onClose}
           >
             Применить фильтры
