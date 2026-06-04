@@ -12,7 +12,7 @@ export function CartPage() {
   }
 
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-col sm:w-fit">
       <div className="flex h-full flex-1 flex-col gap-4 overflow-hidden">
         <div className="flex h-full flex-col justify-between gap-0 overflow-y-auto sm:flex-row sm:gap-5 sm:overflow-hidden">
           <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-5 sm:p-0">

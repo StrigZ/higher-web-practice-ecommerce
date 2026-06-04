@@ -41,7 +41,7 @@ export function HeaderNav({ className }: { className?: string }) {
         <Link
           className={buttonVariants({
             className:
-              'h-full flex-1 px-4! py-2! text-base! font-bold! sm:w-fit sm:flex-none',
+              'h-full flex-1 px-4! py-2! text-base! font-bold! sm:hidden! sm:w-fit sm:flex-none md:inline!',
           })}
           to={'/register'}
         >

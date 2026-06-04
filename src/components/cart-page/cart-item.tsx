@@ -31,7 +31,7 @@ export function CartItem({
   return (
     <div className="flex flex-col gap-3">
       <Card className="bg-background sm:bg-card rounded-none p-0 shadow-none sm:rounded-[12px] sm:shadow-xs">
-        <CardContent className="flex flex-row items-center gap-2 p-0 sm:justify-center sm:gap-x-8 sm:p-4">
+        <CardContent className="flex items-center gap-2 p-0 sm:flex-row sm:justify-center sm:gap-x-8 sm:p-4">
           <img
             alt="обложка усов "
             className="relative aspect-square h-[60px] rounded-none object-cover sm:hidden"
@@ -39,7 +39,7 @@ export function CartItem({
           />
 
           <Link
-            className="hidden grid-cols-[80px_1fr] items-center gap-2 sm:grid"
+            className="hidden flex-col items-center gap-2 sm:flex lg:flex-row"
             to={`/product/${productId}`}
           >
             <img
@@ -47,7 +47,7 @@ export function CartItem({
               className="relative aspect-square h-[80px] object-cover"
               src={product.images[0]}
             />
-            <p className="text-secondary w-40 flex-1 truncate text-base font-normal">
+            <p className="text-secondary max-w-40 flex-1 truncate text-base font-normal">
               {product.name}
             </p>
           </Link>

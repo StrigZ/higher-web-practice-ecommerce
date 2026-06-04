@@ -76,7 +76,7 @@ export function CheckoutPage() {
   return (
     <div className="flex h-full flex-col">
       <form
-        className="flex h-full flex-1 flex-col overflow-y-auto"
+        className="flex h-full flex-1 flex-col overflow-y-auto sm:px-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:py-10">
@@ -91,7 +91,7 @@ export function CheckoutPage() {
             />
             <CustomerInfo control={form.control} />
           </div>
-          <OrderSummary className="sticky bottom-0 w-full" />
+          <OrderSummary className="sticky bottom-0 w-full border-t" />
         </div>
       </form>
 

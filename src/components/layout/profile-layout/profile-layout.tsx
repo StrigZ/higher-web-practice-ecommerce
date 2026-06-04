@@ -17,7 +17,7 @@ export function ProfileLayout() {
   const location = useLocation();
 
   return (
-    <div className="flex h-full items-start sm:gap-5 sm:py-10">
+    <div className="flex h-full items-start sm:gap-5 sm:px-5 sm:py-10">
       <aside className="hidden sm:block">
         <nav>
           <ul className="flex flex-col gap-2 pr-4">

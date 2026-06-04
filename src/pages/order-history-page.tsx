@@ -18,12 +18,16 @@ export function OrderHistoryPage() {
     <div className="flex h-full flex-1 flex-col">
       <div className="flex flex-1 flex-col gap-4 overflow-y-hidden p-5 sm:p-0">
         <h2 className="text-2xl font-bold">История заказов</h2>
-        <ul className="flex h-full flex-col gap-4 overflow-y-scroll">
-          {orders.map((order) => (
-            <li key={order.id}>
-              <OrderHistoryItem {...order} />
-            </li>
-          ))}
+        <ul className="flex h-full flex-col gap-4 overflow-y-auto">
+          {orders.length > 0 ? (
+            orders.map((order) => (
+              <li key={order.id}>
+                <OrderHistoryItem {...order} />
+              </li>
+            ))
+          ) : (
+            <p>Ничего не найдено</p>
+          )}
         </ul>
       </div>
       <MobileMenu />

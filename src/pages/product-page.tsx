@@ -5,14 +5,16 @@ import { ProductImageCarousel } from '@/components/product-page/product-card/pro
 import { ProductInfo } from '@/components/product-page/product-card/product-info';
 import { ProductRatingCard } from '@/components/product-page/product-rating-card/product-rating-card';
 import { Card } from '@/components/ui/card';
+import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { useProductPageContext } from '@/providers/product-page-context/use-product-page-context';
 
 export function ProductPage() {
   const { product } = useProductPageContext();
+  const { user } = useGetCurrentUser();
 
   return (
     <div className="flex h-full flex-col">
-      <div className="overflow-y-scroll sm:py-8">
+      <div className="container mx-auto overflow-y-scroll sm:py-8">
         <div className="flex flex-col gap-5">
           <Breadcrumbs
             className="hidden sm:block"
@@ -30,9 +32,11 @@ export function ProductPage() {
           <div className="px-5 sm:px-0">
             <ProductRatingCard />
           </div>
-          <div className="sticky bottom-0 grid border-t bg-white px-5 py-4 sm:hidden">
-            <ShoppingCartButton product={product} />
-          </div>
+          {user && (
+            <div className="sticky bottom-0 grid border-t bg-white px-5 py-4 sm:hidden">
+              <ShoppingCartButton product={product} />
+            </div>
+          )}
         </div>
       </div>
       <MobileMenu />
