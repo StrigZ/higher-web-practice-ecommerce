@@ -1,9 +1,9 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 
-import { describe, test, expect, beforeEach, jest } from '@jest/globals';
 import { configureStore } from '@reduxjs/toolkit';
+import { expect, test, describe, beforeEach, vi } from 'vitest';
 
 import { clearUser, setUser } from './user-slice';
 
@@ -11,10 +11,10 @@ import { rootReducer } from '@/store/store';
 import type { User } from '@/types';
 
 const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
 };
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
@@ -32,7 +32,7 @@ const mockUser: User = {
 
 describe('use slice', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('setUser saves userId to localStorage', () => {
