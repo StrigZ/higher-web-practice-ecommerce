@@ -28,4 +28,3 @@ coverage
 .env
 .env.local
 
-db.json
