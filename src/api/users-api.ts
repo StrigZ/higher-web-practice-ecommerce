@@ -13,8 +13,6 @@ export const usersApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    // queries
-    // get user info
     getUserById: builder.query<User, { userId: User['id'] }>({
       query: ({ userId }) => ({
         url: `${API_URL}/${userId}`,
@@ -34,8 +32,6 @@ export const usersApi = createApi({
       }),
       providesTags: ['Users'],
     }),
-    //mutations
-    // register user
     registerUser: builder.mutation<User, RegisterUserArgs>({
       query: (body) => ({
         url: API_URL,
@@ -44,7 +40,6 @@ export const usersApi = createApi({
       }),
       invalidatesTags: ['Users'],
     }),
-    // update user
     updateUser: builder.mutation<
       User,
       {
@@ -62,7 +57,6 @@ export const usersApi = createApi({
       }),
       invalidatesTags: ['Users'],
     }),
-    // delete user
     deleteUser: builder.mutation<User, { userId: User['id'] }>({
       query: ({ userId }) => ({
         url: `${API_URL}/${userId}`,

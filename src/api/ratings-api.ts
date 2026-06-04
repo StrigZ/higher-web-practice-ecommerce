@@ -9,8 +9,6 @@ export const ratingsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
   tagTypes: ['Ratings'],
   endpoints: (builder) => ({
-    // quries
-    // get product rating
     getProductRatings: builder.query<
       ProductRating[],
       { productId: Product['id'] }
@@ -27,8 +25,6 @@ export const ratingsApi = createApi({
         })),
       ],
     }),
-    // mutation
-    // add rating
     addRating: builder.mutation<ProductRating, Omit<ProductRating, 'id'>>({
       query: (body) => ({
         url: API_URL,
@@ -39,7 +35,6 @@ export const ratingsApi = createApi({
         { type: 'Ratings', id: `LIST-${productId}` },
       ],
     }),
-    // update rating
     updateRating: builder.mutation<
       ProductRating,
       {
