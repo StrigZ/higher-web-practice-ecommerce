@@ -11,7 +11,7 @@ export const formSchema = z
     city: z.string().nonoptional(),
     address: z.string().nonoptional(),
     pickupPoint: z.string().nonoptional(),
-    phone: z.string().nonoptional(),
+    phone: z.string().nonempty('Поле не может быть пустым'),
     comment: z.string().optional(),
   })
   .superRefine((data, ctx) => {
