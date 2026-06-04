@@ -40,7 +40,7 @@ export type Filters = {
   searchTerm: string | null;
   category: ProductCategory | null;
   subcategory: ProductSubcategory | null;
-  style: ProductStyle | null;
+  style: string | null;
   thickness: ProductThickness | null;
   curliness: ProductCurliness | null;
   inStock: true | null;
