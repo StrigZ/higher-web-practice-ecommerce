@@ -3,7 +3,7 @@ import type { Filters } from '@/types/product';
 
 export function filterProducts(
   products: Product[],
-  filters: Filters,
+  filters: Partial<Filters>,
 ): Product[] {
   const filtered = products.filter((product) => {
     if (
