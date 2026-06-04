@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { MainLayout, ProfileLayout } from '@/components/layout';
-import { ProtectedRoute } from '@/components/protected-route';
+import { ProtectedRoute } from '@/components/protected-route/protected-route';
 import { CartPage } from '@/pages/cart-page';
 import { CatalogPage } from '@/pages/catalog-page';
 import { CheckoutPage } from '@/pages/checkout-page';
