@@ -33,7 +33,7 @@ export function CheckoutPage() {
       deliveryMethod: 'courier',
       phone: user?.phone ?? '',
       comment: '',
-      pickupPoint: pickupPoints[0].id,
+      pickupPointId: pickupPoints[0].id,
       address: '',
       city: cities[0],
     },
@@ -67,7 +67,7 @@ export function CheckoutPage() {
       comment: data.comment,
       ...(data.deliveryMethod === 'courier'
         ? { deliveryAddress: `г. ${data.city}, ${data.address}` }
-        : { pickupPointId: data.pickupPoint }),
+        : { pickupPointId: data.pickupPointId }),
     });
 
     if (newOrder) {

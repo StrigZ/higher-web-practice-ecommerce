@@ -20,7 +20,7 @@ export function PickupPointPicker({
   return (
     <Controller
       control={control}
-      name="pickupPoint"
+      name="pickupPointId"
       render={({ field, fieldState }) => (
         <Field>
           <Select

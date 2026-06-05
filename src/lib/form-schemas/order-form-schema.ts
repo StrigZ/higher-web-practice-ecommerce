@@ -10,7 +10,7 @@ export const formSchema = z
     deliveryMethod: z.enum(deliveryMethods),
     city: z.string().nonoptional(),
     address: z.string().nonoptional(),
-    pickupPoint: z.string().nonoptional(),
+    pickupPointId: z.string().nonoptional(),
     phone: z.string().nonempty('Поле не может быть пустым'),
     comment: z.string().optional(),
   })
@@ -22,11 +22,11 @@ export const formSchema = z
         path: ['address'],
       });
     }
-    if (data.deliveryMethod === 'pickup_point' && !data.pickupPoint) {
+    if (data.deliveryMethod === 'pickup_point' && !data.pickupPointId) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: 'Выберите пункт выдачи',
-        path: ['pickupPoint'],
+        path: ['pickupPointId'],
       });
     }
   });
