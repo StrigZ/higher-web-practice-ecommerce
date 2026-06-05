@@ -1,5 +1,6 @@
 import { ShoppingCart } from 'lucide-react';
 import { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from './ui/button';
 
@@ -24,6 +25,8 @@ export function ShoppingCartButton({
   quantity?: number;
 }) {
   const userId = useAppSelector(selectUserId);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [addItem, { isLoading: isAddMutationLoading }] = useAddItemMutation();
   const [updateItemQuantity, { isLoading: isUpdateMutationLoading }] =
@@ -45,7 +48,10 @@ export function ShoppingCartButton({
   );
 
   const handleAddItem = () => {
-    if (!userId) return;
+    if (!userId) {
+      navigate('/login', { state: { from: location.pathname } });
+      return;
+    }
 
     if (cartItem) {
       updateItemQuantity({
@@ -62,7 +68,12 @@ export function ShoppingCartButton({
   };
 
   const handleDecrementItem = () => {
-    if (!userId || !cartItem) return;
+    if (!userId) {
+      navigate('/login', { state: { from: location.pathname } });
+      return;
+    }
+
+    if (!cartItem) return;
 
     if (cartItem.quantity > 1) {
       updateItemQuantity({
@@ -75,8 +86,6 @@ export function ShoppingCartButton({
       });
     }
   };
-
-  if (!userId) return null;
 
   return cartItem ? (
     <div className={cn('flex items-center justify-center gap-2', className)}>

@@ -5,12 +5,10 @@ import { ProductImageCarousel } from '@/components/product-page/product-card/pro
 import { ProductInfo } from '@/components/product-page/product-card/product-info';
 import { ProductRatingCard } from '@/components/product-page/product-rating-card/product-rating-card';
 import { Card } from '@/components/ui/card';
-import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { useProductPageContext } from '@/providers/product-page-context/use-product-page-context';
 
 export function ProductPage() {
   const { product } = useProductPageContext();
-  const { user } = useGetCurrentUser();
 
   return (
     <div className="flex h-full flex-col">
@@ -32,11 +30,9 @@ export function ProductPage() {
           <div className="px-5 sm:px-0">
             <ProductRatingCard />
           </div>
-          {user && (
-            <div className="sticky bottom-0 grid border-t bg-white px-5 py-4 sm:hidden">
-              <ShoppingCartButton product={product} />
-            </div>
-          )}
+          <div className="sticky bottom-0 grid border-t bg-white px-5 py-4 sm:hidden">
+            <ShoppingCartButton product={product} />
+          </div>
         </div>
       </div>
       <MobileMenu />
