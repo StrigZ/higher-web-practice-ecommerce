@@ -47,7 +47,7 @@ export const usersApi = createApi({
         data: Pick<
           User,
           'firstName' | 'language' | 'lastName' | 'notifyByEmail'
-        >;
+        > & { password?: string };
       }
     >({
       query: ({ data, userId }) => ({

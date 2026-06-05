@@ -1,8 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import * as z from 'zod';
 
 import { useUpdateUserMutation } from '@/api/users-api';
 import { MobileMenu } from '@/components/layout/main-layout/mobile-menu/mobile-menu';
@@ -16,26 +15,31 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useGetCurrentUser } from '@/hooks/use-get-current-user';
-
-const formSchema = z.object({
-  firstName: z.string().nonempty('Поле не может быть пустым'),
-  lastName: z.string().nonempty('Поле не может быть пустым'),
-  email: z.email().nonempty('Поле не может быть пустым'),
-});
+import {
+  updateUserFormSchema,
+  type UpdateUserFormValues,
+} from '@/lib/form-schemas/update-user-form-schema';
 
 export function ProfileEditPage() {
   const navigate = useNavigate();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<UpdateUserFormValues>({
+    resolver: zodResolver(updateUserFormSchema),
   });
+  const password = useWatch({ control: form.control, name: 'password' });
 
   const { user } = useGetCurrentUser();
 
   useEffect(() => {
     if (!user) return;
+    const { password, ...rest } = user;
+    void password;
 
-    form.setValues(user);
+    form.reset(rest);
   }, [form, user]);
+
+  useEffect(() => {
+    if (!password) form.resetField('confirmPassword');
+  }, [password, form]);
 
   const [updateUser] = useUpdateUserMutation();
 
@@ -43,7 +47,7 @@ export function ProfileEditPage() {
     return <p>loading...</p>;
   }
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: UpdateUserFormValues) => {
     const { data: newUser } = await updateUser({ data, userId: user.id });
 
     if (newUser) {
@@ -119,6 +123,52 @@ export function ProfileEditPage() {
                     </Field>
                   )}
                 />
+                <Controller
+                  control={form.control}
+                  name="password"
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor="edit-new-password">
+                        Новый пароль
+                      </FieldLabel>
+                      <Input
+                        {...field}
+                        aria-invalid={fieldState.invalid}
+                        autoComplete="off"
+                        id="edit-new-password"
+                        placeholder="******"
+                        type="password"
+                      />
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
+                    </Field>
+                  )}
+                />
+                {password && (
+                  <Controller
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field, fieldState }) => (
+                      <Field data-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor="edit-confirm-new-password">
+                          Повторите новый пароль
+                        </FieldLabel>
+                        <Input
+                          {...field}
+                          aria-invalid={fieldState.invalid}
+                          autoComplete="off"
+                          id="edit-confirm-new-password"
+                          placeholder="******"
+                          type="password"
+                        />
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </Field>
+                    )}
+                  />
+                )}
               </FieldGroup>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Link
