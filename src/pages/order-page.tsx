@@ -8,7 +8,7 @@ import { OrderPageItem } from '@/components/order-page/item-card';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { pickupPoints } from '@/lib/constants';
+import { paymentMethodToTextMap, pickupPoints } from '@/lib/constants';
 
 export function OrderPage() {
   const location = useLocation();
@@ -91,9 +91,9 @@ export function OrderPage() {
                   {order.totalPrice} ₽
                 </p>
               </div>
-              {order.paymentMethod === 'card_online' && (
-                <p className="text-muted-foreground">Оплачено картой</p>
-              )}
+              <p className="text-muted-foreground">
+                {paymentMethodToTextMap[order.paymentMethod]}
+              </p>
             </div>
           </CardContent>
         </Card>

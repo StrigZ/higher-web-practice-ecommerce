@@ -1,3 +1,5 @@
+import type { PaymentMethod } from '@/types';
+
 export const productCategories = [
   'Классические',
   'Исторические',
@@ -63,3 +65,9 @@ export const pickupPoints = [
 export const cities = ['Москва', 'Санкт-Петербург'] as const;
 
 export const userLanguages = ['ru', 'en'] as const;
+
+export const paymentMethodToTextMap: Record<PaymentMethod, string> = {
+  card_on_delivery: 'Оплата картой при получении',
+  card_online: 'Оплачено картой',
+  cash: 'Оплачено наличными',
+};

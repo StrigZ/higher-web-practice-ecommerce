@@ -13,8 +13,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { paymentMethodToTextMap } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import type { Order, OrderStatus, PaymentMethod } from '@/types';
+import type { Order, OrderStatus } from '@/types';
 
 const statusToTextMap: Record<OrderStatus, string> = {
   cancelled: 'Отменен',
@@ -23,12 +24,6 @@ const statusToTextMap: Record<OrderStatus, string> = {
   pending: 'В работе',
   processing: 'Обрабатывается',
   shipped: 'Отправлен',
-};
-
-const paymentMethodToTextMap: Record<PaymentMethod, string> = {
-  card_on_delivery: 'Оплачено картой',
-  card_online: 'Оплачено картой',
-  cash: 'Оплачено наличными',
 };
 
 export function OrderHistoryItem(order: Order) {
