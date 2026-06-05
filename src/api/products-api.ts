@@ -29,6 +29,17 @@ export const productsApi = createApi({
         { type: 'Products', id: productId },
       ],
     }),
+    patchProductRating: builder.mutation({
+      query: ({ productId, rating, ratingCount }) => ({
+        url: `${API_URL}/${productId}`,
+        method: 'PATCH',
+        body: { rating, ratingCount },
+      }),
+      invalidatesTags: (_res, _err, { productId }) => [
+        { type: 'Products', id: productId },
+        { type: 'Products', id: 'LIST' },
+      ],
+    }),
   }),
 });
 

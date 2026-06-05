@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { productsApi } from './products-api';
+
 import type { Product, ProductRating } from '@/types';
 
 const API_URL = '/ratings';
@@ -34,6 +36,29 @@ export const ratingsApi = createApi({
       invalidatesTags: (_result, _, { productId }) => [
         { type: 'Ratings', id: `LIST-${productId}` },
       ],
+      onQueryStarted: async ({ productId }, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          const { data: ratings } = await dispatch(
+            ratingsApi.endpoints.getProductRatings.initiate(
+              { productId },
+              { forceRefetch: true },
+            ),
+          );
+          if (!ratings?.length) return;
+          const avg =
+            ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length;
+          await dispatch(
+            productsApi.endpoints.patchProductRating.initiate({
+              productId,
+              rating: avg,
+              ratingCount: ratings.length,
+            }),
+          );
+        } catch (error) {
+          console.error('Failed to recalculate product rating:', error);
+        }
+      },
     }),
     updateRating: builder.mutation<
       ProductRating,
@@ -52,6 +77,29 @@ export const ratingsApi = createApi({
         { type: 'Ratings', id: ratingId },
         { type: 'Ratings', id: `LIST-${productId}` },
       ],
+      onQueryStarted: async ({ productId }, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          const { data: ratings } = await dispatch(
+            ratingsApi.endpoints.getProductRatings.initiate(
+              { productId },
+              { forceRefetch: true },
+            ),
+          );
+          if (!ratings?.length) return;
+          const avg =
+            ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length;
+          await dispatch(
+            productsApi.endpoints.patchProductRating.initiate({
+              productId,
+              rating: avg,
+              ratingCount: ratings.length,
+            }),
+          );
+        } catch (error) {
+          console.error('Failed to recalculate product rating:', error);
+        }
+      },
     }),
   }),
 });
