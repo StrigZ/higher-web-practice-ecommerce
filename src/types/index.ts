@@ -23,7 +23,6 @@ export type {
   OrderStatus,
   PaymentMethod,
   DeliveryMethod,
-  Address,
   PickupPoint,
   OrderCustomerInfo,
   CreateOrderPayload,

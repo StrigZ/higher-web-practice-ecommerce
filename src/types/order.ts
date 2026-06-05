@@ -8,18 +8,14 @@ export type Order = {
   status: OrderStatus;
   items: CartItem[];
   totalPrice: number;
-
   paymentMethod: PaymentMethod;
   deliveryMethod: DeliveryMethod;
-
   deliveryAddress?: string;
   pickupPointId?: string;
-
   customer: OrderCustomerInfo;
-
   comment?: string;
-
   createdAt: string;
+  number: number;
 };
 
 export type OrderItem = {

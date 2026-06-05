@@ -13,7 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { paymentMethodToTextMap } from '@/lib/constants';
+import { paymentMethodToTextMap, pickupPoints } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import type { Order, OrderStatus } from '@/types';
 
@@ -32,27 +32,38 @@ export function OrderHistoryItem(order: Order) {
       <CardContent className="flex flex-col gap-4 p-4">
         <Link className="flex flex-col sm:flex-row" to={`/order/${order.id}`}>
           <div className="flex flex-1 flex-col gap-2">
-            <p className="font-heading text-base font-bold sm:text-xl">
-              от{' '}
-              {format(order.createdAt, "d MMMM yyyy 'г.'", {
-                locale: ru,
-              })}
-            </p>
-            <p
-              className={cn('font-bold sm:text-base', {
-                'text-destructive': order.status === 'cancelled',
-                'text-success': order.status === 'delivered',
-              })}
-            >
-              {statusToTextMap[order.status]}{' '}
-              {order.status === 'delivered' && (
-                <span className="text-muted-foreground text-sm font-normal">
+            <div className="flex items-center gap-2">
+              <p className="font-heading text-base font-bold sm:text-xl">
+                от{' '}
+                {format(order.createdAt, "d MMMM yyyy 'г.'", {
+                  locale: ru,
+                })}
+              </p>
+              <p className="text-muted-foreground">№ {order.number}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <p
+                className={cn('font-bold sm:text-base', {
+                  'text-destructive': order.status === 'cancelled',
+                  'text-success': order.status === 'delivered',
+                })}
+              >
+                {statusToTextMap[order.status]}{' '}
+              </p>
+              <div className="text-muted-foreground flex items-center gap-2 text-sm font-normal">
+                <p>
                   {order.deliveryMethod === 'pickup_point'
-                    ? 'в пункте выдачи'
-                    : 'по адресу'}
-                </span>
-              )}
-            </p>
+                    ? 'В пункте выдачи'
+                    : 'По адресу'}
+                </p>
+                <p className="">
+                  {order.deliveryMethod === 'pickup_point'
+                    ? pickupPoints.find(({ id }) => id === order.pickupPointId)
+                        ?.address
+                    : order.deliveryAddress}
+                </p>
+              </div>
+            </div>
           </div>
           <div className="flex flex-row items-center justify-between text-right sm:flex-col">
             <p className="font-heading order-2 text-2xl font-bold sm:order-1">

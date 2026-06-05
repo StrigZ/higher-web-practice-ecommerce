@@ -29,13 +29,27 @@ export const ordersApi = createApi({
       ],
     }),
 
-    createOrder: builder.mutation<Order, Omit<Order, 'id'>>({
-      query: (body) => ({
-        url: API_URL,
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: [{ type: 'Orders', id: `LIST` }],
+    createOrder: builder.mutation({
+      queryFn: async (body, _api, _extraOptions, baseQuery) => {
+        const ordersResult = await baseQuery({
+          url: API_URL,
+          params: { userId: body.userId },
+        });
+
+        if (ordersResult.error) return { error: ordersResult.error };
+
+        const orders = ordersResult.data as Order[];
+
+        const result = await baseQuery({
+          url: API_URL,
+          method: 'POST',
+          body: { ...body, number: orders.length + 1 },
+        });
+
+        if (result.error) return { error: result.error };
+        return { data: result.data as Order };
+      },
+      invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
     }),
   }),
 });
