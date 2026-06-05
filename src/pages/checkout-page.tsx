@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useCreateOrderMutation } from '@/api/orders-api';
 import { CustomerInfo } from '@/components/checkout-page/customer-info';
@@ -9,6 +9,7 @@ import { DeliveryMethodPicker } from '@/components/checkout-page/delivery-method
 import { OrderSummary } from '@/components/checkout-page/order-summary';
 import { PaymentMethodPicker } from '@/components/checkout-page/payment-method-picker';
 import { MobileMenu } from '@/components/layout/main-layout/mobile-menu/mobile-menu';
+import { buttonVariants } from '@/components/ui/button';
 import { useGetCurrentUser } from '@/hooks/use-get-current-user';
 import { useGetCurrentUserCart } from '@/hooks/use-get-current-user-cart';
 import { cities, pickupPoints } from '@/lib/constants';
@@ -20,7 +21,8 @@ import {
 export function CheckoutPage() {
   const navigate = useNavigate();
   const { user } = useGetCurrentUser();
-  const { cartItems, totalPrice, clearCart } = useGetCurrentUserCart();
+  const { cartItems, totalPrice, clearCart, quantity } =
+    useGetCurrentUserCart();
 
   const [createOrder] = useCreateOrderMutation();
 
@@ -51,7 +53,7 @@ export function CheckoutPage() {
   }, [form, user]);
 
   async function onSubmit(data: CheckoutFormValues) {
-    if (!user) return;
+    if (!user || quantity === 0) return;
 
     const { data: newOrder } = await createOrder({
       userId: user.id,
@@ -75,25 +77,34 @@ export function CheckoutPage() {
   }
   return (
     <div className="flex h-full flex-col">
-      <form
-        className="flex h-full flex-1 flex-col overflow-y-auto sm:px-5"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:py-10">
-          <div className="flex h-full flex-1 flex-col gap-6 p-5 sm:p-0">
-            <PaymentMethodPicker
-              active={paymentMethod}
-              control={form.control}
-            />
-            <DeliveryMethodPicker
-              active={deliveryMethod}
-              control={form.control}
-            />
-            <CustomerInfo control={form.control} />
+      {quantity > 0 ? (
+        <form
+          className="flex h-full flex-1 flex-col overflow-y-auto sm:px-5"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:py-10">
+            <div className="flex h-full flex-1 flex-col gap-6 p-5 sm:p-0">
+              <PaymentMethodPicker
+                active={paymentMethod}
+                control={form.control}
+              />
+              <DeliveryMethodPicker
+                active={deliveryMethod}
+                control={form.control}
+              />
+              <CustomerInfo control={form.control} />
+            </div>
+            <OrderSummary className="sticky bottom-0 w-full border-t" />
           </div>
-          <OrderSummary className="sticky bottom-0 w-full border-t" />
+        </form>
+      ) : (
+        <div className="flex h-full flex-1 flex-col items-center justify-center overflow-y-auto sm:px-5">
+          Ваша корзина пуста.
+          <Link className={buttonVariants({ variant: 'link' })} to={'/'}>
+            На главную
+          </Link>
         </div>
-      </form>
+      )}
 
       <MobileMenu />
     </div>
